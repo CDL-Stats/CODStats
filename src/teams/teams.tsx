@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NavBar from "../navbar";
 
 function Teams() {
 
@@ -20,9 +21,8 @@ function Teams() {
 
     return (
         <div>
+          <NavBar />
         <h1>All Teams</h1>
-        <span><a href={"/teams/new"}>Create Team</a></span>
-        <span><a href={"/players"}>All Players</a></span>
         <table style={{ width: 500 }}>
                 <thead>
                     <tr>

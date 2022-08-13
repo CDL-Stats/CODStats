@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from '../navbar';
 
 
 function CreateTeam() {
@@ -44,6 +45,7 @@ function CreateTeam() {
 
   return (
     <div className="Body">
+      <NavBar />
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -76,7 +78,6 @@ function CreateTeam() {
           <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
       </div>
-      <span><a href={"/teams"}>All Teams</a></span>
     </div>
   )};
 

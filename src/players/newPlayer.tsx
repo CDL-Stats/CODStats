@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from '../navbar';
 
 
 function CreatePlayer() {
@@ -63,6 +64,7 @@ function CreatePlayer() {
 
   return (
     <div className="App">
+      <NavBar />
         <div>
             <form onSubmit={handleSubmit}>
                 <input
@@ -94,7 +96,6 @@ function CreatePlayer() {
                 <div className="message">{message ? <p>{message}</p> : null}</div>
             </form>
       </div>
-      <div><a href={"/players"}>All Players</a></div>
     </div>
   )};
 

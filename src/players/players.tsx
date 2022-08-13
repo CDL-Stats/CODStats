@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NavBar from "../navbar";
 
 function Players() {
     const [players, setPlayers] = useState([])
@@ -21,9 +22,8 @@ function Players() {
 
     return (
         <div>
+          <NavBar />
         <h1>All Players</h1>
-        <span><a href={"/players/new"}>Create Players</a></span>
-        <span><a href={"/teams"}>All Teams</a></span>
         <table style={{ width: 500 }}>
                 <thead>
                     <tr>

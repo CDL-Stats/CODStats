@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useParams } from "react-router";
+import NavBar from "../navbar";
 
 
 export default function Team() {
-    <pre>{process.env.devEnv}</pre>
     const [team, setTeam] = useState([])
     const [players, setPlayers] = useState([])
     
@@ -43,6 +43,7 @@ export default function Team() {
 
     return (
         <div>
+            <NavBar />
             <h1>{team['teamLocation']} {team['teamName']}</h1>
             <span><a href={"/teams"}>All Teams</a></span>
             <table style={{ width: 500 }}>

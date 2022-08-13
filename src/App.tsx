@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import 'tailwindcss/tailwind.css'
+import NavBar from './navbar';
 
 
 function App() {
@@ -65,35 +66,39 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={firstName}
-          placeholder="First Name"
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          type="text"
-          value={lastName}
-          placeholder="Last"
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <input
-          type="text"
-          value={nickName}
-          placeholder="Nickname"
-          onChange={(e) => setNickName(e.target.value)}
-        />
-        <select onChange={handleTeamChange}> 
-          <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
-          {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
-        </select>
+      <NavBar />
+      <body className='bg-gray-100'>
+        <span className= 'text-3xl font-bold underline'>Create Player</span>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={firstName}
+            placeholder="First Name"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            type="text"
+            value={lastName}
+            placeholder="Last"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <input
+            type="text"
+            value={nickName}
+            placeholder="Nickname"
+            onChange={(e) => setNickName(e.target.value)}
+          />
+          <select onChange={handleTeamChange}> 
+            <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
+            {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
+          </select>
 
 
-        <button type="submit">Create</button>
+          <button type="submit">Create</button>
 
-        <div className="message">{message ? <p>{message}</p> : null}</div>
-      </form>
+          <div className="message">{message ? <p>{message}</p> : null}</div>
+        </form>
+      </body>
     </div>
   )};
 

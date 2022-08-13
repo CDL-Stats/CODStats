@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import NavBar from "../navbar";
 
 function Player() {
     const { slug } = useParams();
@@ -78,6 +79,7 @@ function Player() {
 
     return (
         <div>
+          <NavBar />
             <div className='player-header'>
                 <form onSubmit={handleSubmit}>
                     <input
@@ -104,7 +106,6 @@ function Player() {
                 </form>
             </div>
             <span><a href={"/teams/" + team['slug']}>Go to team</a></span>
-            <span><a href={"/players"}>All Players</a></span>
         </div>
     )
 }
