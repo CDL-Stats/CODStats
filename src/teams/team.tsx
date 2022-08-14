@@ -14,7 +14,7 @@ export default function Team() {
     }
 
     const fetchData = () => {
-        fetch(`ENV/teams/${slug}`)
+        fetch(`${process.env.REACT_APP_API_URL}/teams/${slug}`)
           .then(response => {
             return response.json()
           })
