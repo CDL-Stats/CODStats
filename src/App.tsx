@@ -53,7 +53,7 @@ function App() {
         setLastName("");
         setNickName("");
         setTeam([]);
-        setMessage("User created successfully");
+        setMessage("Player created successfully");
       } else {
         setMessage("Some error occured");
       }

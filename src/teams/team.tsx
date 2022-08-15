@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useParams } from "react-router";
 import NavBar from "../navbar";
+import '../templates/form-template.css';
+import '../templates/table-template.css';
 
 
 export default function Team() {
@@ -76,47 +78,64 @@ export default function Team() {
     console.log(team)
 
     return (
-        <div>
-            <NavBar />
-            <h1>{team['teamLocation']} {team['teamName']}</h1>
-            <h2>Update Team</h2>
-            <form onSubmit={handleSubmit}>
-                    <input
-                    type="text"
-                    value={teamLocation}
-                    placeholder={teamLocation}
-                    onChange={(e) => setTeamLocation(e.target.value)}/>
-                    <input
-                    type="text"
-                    value={teamName}
-                    placeholder={teamName}
-                    onChange={(e) => setTeamName(e.target.value)}/>
-                    <input
-                    type="text"
-                    value={teamPhotoUrl}
-                    placeholder={teamPhotoUrl}
-                    onChange={(e) => setTeamPhotoURL(e.target.value)}/>
-                    <button type="submit">Update</button>
-            </form>
-            <h2>Players</h2>
-            <table style={{ width: 500 }}>
-                <thead>
-                    <tr>
-                        <th>Nickname</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {players.map(player => 
-                    <tr> 
-                        <td><a href={"/players/" + player['nickName']}>{player['nickName']}</a></td>
-                        <td>{player['firstName']}</td>
-                        <td>{player['lastName']}</td></tr>
-                    )}
-                </tbody>
-             </table>
-            <div><button onClick={() => handleDelete()}>Delete Team</button></div>
-        </div>
-    )
+    <div>
+        <NavBar />
+        <body className="form-wrapper">
+            <div className="form-body">
+                <h1 className="form-header">{team['teamLocation']} {team['teamName']}</h1>
+                    <form onSubmit={handleSubmit} className=''>
+                        <div className="form-group-row">
+                            <label className='form-group-label'>Location: </label>
+                            <input
+                            type="text"
+                            value={teamLocation}
+                            placeholder={teamLocation}
+                            autoComplete="off"
+                            onChange={(e) => setTeamLocation(e.target.value)}
+                            className="form-group-input"
+                            />
+                        </div>
+                        <div className="form-group-row">
+                            <label className='form-group-label'>Team Name</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={teamName}
+                            placeholder={teamName}
+                            onChange={(e) => setTeamName(e.target.value)}/>
+                        </div>
+                        <div className="form-group-row">
+                            <label className="form-group-label">Photo URL</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={teamPhotoUrl}
+                            placeholder={teamPhotoUrl}
+                            onChange={(e) => setTeamPhotoURL(e.target.value)}/>
+                        </div>
+                        <button type="submit" className="form-button">Update</button>
+                    </form>
+            </div>
+            <div className="form-body">
+                <h2 className="form-header">Players</h2>
+                <table className='table-striped'>
+                    <thead>
+                        <tr className="table-header">
+                            <th>Nickname</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {players.map(player => 
+                        <tr> 
+                            <td><a href={"/players/" + player['nickName']}>{player['nickName']}</a></td>
+                            <td>{player['firstName']}</td>
+                            <td>{player['lastName']}</td></tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+    </body>
+</div>)
 }

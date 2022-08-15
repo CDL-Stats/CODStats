@@ -1,0 +1,8 @@
+.table-header{
+    color: #339af0;
+    text-align: left;
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+    background-color: rgba(0, 0, 0, 0.05);
+}

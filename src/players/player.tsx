@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import NavBar from "../navbar";
+import '../templates/form-template.css';
 
 function Player() {
     const { slug } = useParams();
@@ -78,35 +79,53 @@ function Player() {
       };
 
     return (
-        <div>
-          <NavBar />
-            <div className='player-header'>
-                <form onSubmit={handleSubmit}>
-                    <input
-                    type="text"
-                    value={firstName}
-                    placeholder={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}/>
-                    <input
-                    type="text"
-                    value={lastName}
-                    placeholder={lastName}
-                    onChange={(e) => setLastName(e.target.value)}/>
-                    <input
-                    type="text"
-                    value={nickName}
-                    placeholder={nickName}
-                    onChange={(e) => setNickName(e.target.value)}/>
-                    <select onChange={handleTeamChange}> 
-                        <option value={team['teamName']}>{team['teamName']}</option>
-                        {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
-                    </select>
-                    <button type="submit">Update</button>
-                    <div className="message">{message ? <p>{message}</p> : null}</div>
-                </form>
+  <div>
+    <NavBar />
+    <div className="form-wrapper">
+      <div className='form-body'>
+        <h1 className="form-header">{nickName}</h1>
+          <form onSubmit={handleSubmit}>
+          <div className="form-group-row">
+            <label className='form-group-label'>First Name: </label>
+              <input
+              className="form-group-input"
+              type="text"
+              value={firstName}
+              placeholder={firstName}
+              onChange={(e) => setFirstName(e.target.value)}/>
             </div>
-            <span><a href={"/teams/" + team['slug']}>Go to team</a></span>
-        </div>
+            <div className="form-group-row">
+              <label className='form-group-label'>Last Name: </label>
+              <input
+              className="form-group-input"
+              type="text"
+              value={lastName}
+              placeholder={lastName}
+              onChange={(e) => setLastName(e.target.value)}/>
+            </div>
+            <div className="form-group-row">
+              <label className='form-group-label'>Nickname: </label>
+              <input
+              className="form-group-input"
+              type="text"
+              value={nickName}
+              placeholder={nickName}
+              onChange={(e) => setNickName(e.target.value)}/>
+            </div>
+            <div className="form-group-row">
+              <label className='form-group-label'>Team: </label>
+              <select className="form-group-input" onChange={handleTeamChange}> 
+                  <option value={team['teamName']}>{team['teamName']}</option>
+                  {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
+              </select>
+            </div>
+              <button type="submit" className="form-button">Update</button>
+              <div className="message">{message ? <p>{message}</p> : null}</div>
+          </form>
+      </div>
+      <span><a href={"/teams/" + team['slug']}>Go to team</a></span>
+      </div>
+  </div>
     )
 }
 

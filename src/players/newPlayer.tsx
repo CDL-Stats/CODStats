@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../navbar';
+import '../templates/form-template.css';
 
 
 function CreatePlayer() {
@@ -51,7 +52,7 @@ function CreatePlayer() {
         setLastName("");
         setNickName("");
         setTeam([]);
-        setMessage("User created successfully");
+        setMessage("Player created successfully");
       } else {
         setMessage("Some error occured");
       }
@@ -65,36 +66,53 @@ function CreatePlayer() {
   return (
     <div className="App">
       <NavBar />
-        <div>
+        <div className='form-wrapper'>
+          <div className='form-body'>
+          <h1 className="form-header">Create Player</h1>
             <form onSubmit={handleSubmit}>
+              <div className="form-group-row">
+                <label className='form-group-label'>First Name: </label>
                 <input
+                className="form-group-input"
                 type="text"
                 value={firstName}
                 placeholder="First Name"
                 onChange={(e) => setFirstName(e.target.value)}
                 />
+              </div>
+              <div className="form-group-row">
+                <label className='form-group-label'>Last Name: </label>
                 <input
+                className="form-group-input"
                 type="text"
                 value={lastName}
                 placeholder="Last"
                 onChange={(e) => setLastName(e.target.value)}
                 />
+              </div>
+              <div className="form-group-row">
+               <label className='form-group-label'>Nickname: </label>
                 <input
+                className="form-group-input"
                 type="text"
                 value={nickName}
                 placeholder="Nickname"
                 onChange={(e) => setNickName(e.target.value)}
                 />
-                <select onChange={handleTeamChange}> 
+              </div>
+              <div className="form-group-row">
+                <label className='form-group-label'>Team: </label>
+                <select onChange={handleTeamChange} className="form-group-input"> 
                 <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
                 {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
                 </select>
+              </div>
 
-
-                <button type="submit">Create</button>
+              <button type="submit" className="form-button">Create</button>
 
                 <div className="message">{message ? <p>{message}</p> : null}</div>
             </form>
+            </div>
       </div>
     </div>
   )};

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../navbar";
+import '../templates/form-template.css';
+import '../templates/table-template.css';
 
 function Teams() {
 
@@ -20,13 +22,15 @@ function Teams() {
       }, [])
 
     return (
-        <div>
-          <NavBar />
-        <h1>All Teams</h1>
-        <table style={{ width: 500 }}>
-                <thead>
+  <div>
+    <NavBar />
+    <div className="form-wrapper">
+      <div className="form-body">
+        <h1 className="form-header">All Teams</h1>
+        <table style={{ width: 500 }} className="table-striped">
+                <thead className="table-header">
                     <tr>
-                       <th>Team Name</th>
+                        <th>Team Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +38,8 @@ function Teams() {
                 </tbody>
         </table>
         </div>
+      </div>
+  </div>
     )
 }
 

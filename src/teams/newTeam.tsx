@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../navbar';
+import '../templates/form-template.css';
 
 
 function CreateTeam() {
@@ -46,37 +47,56 @@ function CreateTeam() {
   return (
     <div className="Body">
       <NavBar />
-      <div>
+      <div className='form-wrapper'>
+      <div className='form-body'>
+      <h1 className="form-header">Create Team</h1>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={slug}
-            placeholder="Slug"
-            onChange={(e) => setSlug(e.target.value)}
-          />
-          <input
-            type="text"
-            value={teamLocation}
-            placeholder="Location"
-            onChange={(e) => setTeamLocation(e.target.value)}
-          />
-          <input
-            type="text"
-            value={teamName}
-            placeholder="Team Name"
-            onChange={(e) => setTeamName(e.target.value)}
-          />
-          <input
-            type="text"
-            value={teamLogo}
-            placeholder="Team Logo URL"
-            onChange={(e) => setTeamLogo(e.target.value)}
-          />
+          <div className="form-group-row">
+            <label className='form-group-label'>Slug: </label>
+            <input
+             className="form-group-input"
+              type="text"
+              value={slug}
+              placeholder="Slug"
+              onChange={(e) => setSlug(e.target.value)}
+            />
+          </div>
+          <div className='form-group-row'>
+          <label className='form-group-label'>Location: </label>
+            <input
+              className="form-group-input"
+              type="text"
+              value={teamLocation}
+              placeholder="Location"
+              onChange={(e) => setTeamLocation(e.target.value)}
+            />
+          </div>
+          <div className='form-group-row'>
+            <label className='form-group-label'>Team Name: </label>
+            <input
+              className="form-group-input"
+              type="text"
+              value={teamName}
+              placeholder="Team Name"
+              onChange={(e) => setTeamName(e.target.value)}
+            />
+          </div>
+          <div className='form-group-row'>
+            <label className='form-group-label'>Photo URL: </label>
+            <input
+              className="form-group-input"
+              type="text"
+              value={teamLogo}
+              placeholder="Team Logo URL"
+              onChange={(e) => setTeamLogo(e.target.value)}
+            />
+          </div>
 
-          <button type="submit">Create</button>
+          <button type="submit" className="form-button">Create</button>
 
           <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
+      </div>
       </div>
     </div>
   )};
