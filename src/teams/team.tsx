@@ -11,8 +11,15 @@ export default function Team() {
     const [players, setPlayers] = useState([])
     const [teamLocation, setTeamLocation] = useState('')
     const [teamName, setTeamName] = useState('')
-    const [teamPhotoUrl, setTeamPhotoURL] = useState('')
+    const [teamLogo, setTeamLogo] = useState('')
     const [message, setMessage] = useState('')
+    const [primaryColor, setPrimaryColor] = useState('')
+    const [secondaryColor, setSecondaryColor] = useState('')
+    const [shortName, setShortName] = useState('')
+    const [abbreviation, setAbbreviation] = useState('')
+    const [twitterURL, setTwitterURL] = useState('')
+    const [youtubeURL, setYoutubeURL] = useState('')
+    const [instagramURL, setInstagramURL] = useState('')
     
 
     const handleDelete = () => {
@@ -31,7 +38,14 @@ export default function Team() {
             slug: slug,
             teamLocation: teamLocation,
               teamName: teamName,
-              teamPhotoURL: teamPhotoUrl,
+              teamLogo: teamLogo,
+              primaryColor: primaryColor,
+              secondaryColor: secondaryColor,
+              shortName: shortName,
+              abbreviation: abbreviation,
+              twitterURL: twitterURL,
+              youtubeURL: youtubeURL,
+              instagramURL: instagramURL
             }),
           });
           let resJson = await res.json();
@@ -54,7 +68,14 @@ export default function Team() {
             setTeam(data)
             setTeamName(data['teamName'])
             setTeamLocation(data['teamLocation'])
-            setTeamPhotoURL(data['teamPhotoURL'])
+            setTeamLogo(data['teamLogo'])
+            setPrimaryColor(data['primaryColor'])
+            setSecondaryColor(data['secondaryColor'])
+            setAbbreviation(data['abbreviation'])
+            setShortName(data['shortName'])
+            setTwitterURL(data['twitterURL'])
+            setInstagramURL(data['instagramURL'])
+            setYoutubeURL(data['youtubeURL'])
           })
       }
 
@@ -104,15 +125,88 @@ export default function Team() {
                             placeholder={teamName}
                             onChange={(e) => setTeamName(e.target.value)}/>
                         </div>
+
                         <div className="form-group-row">
                             <label className="form-group-label">Photo URL</label>
                             <input
                             className="form-group-input"
                             type="text"
-                            value={teamPhotoUrl}
-                            placeholder={teamPhotoUrl}
-                            onChange={(e) => setTeamPhotoURL(e.target.value)}/>
+                            value={teamLogo}
+                            placeholder={teamLogo}
+                            onChange={(e) => setTeamLogo(e.target.value)}/>
                         </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Primary Color</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={primaryColor}
+                            placeholder={primaryColor}
+                            onChange={(e) => setPrimaryColor(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Secondary Color</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={secondaryColor}
+                            placeholder={secondaryColor}
+                            onChange={(e) => setSecondaryColor(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Short Name</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={shortName}
+                            placeholder={shortName}
+                            onChange={(e) => setShortName(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Abbreviation</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={abbreviation}
+                            placeholder={abbreviation}
+                            onChange={(e) => setAbbreviation(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Twitter URL</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={twitterURL}
+                            placeholder={twitterURL}
+                            onChange={(e) => setTwitterURL(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Youtube URL</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={youtubeURL}
+                            placeholder={youtubeURL}
+                            onChange={(e) => setYoutubeURL(e.target.value)}/>
+                        </div>
+
+                        <div className="form-group-row">
+                            <label className="form-group-label">Instagram URL</label>
+                            <input
+                            className="form-group-input"
+                            type="text"
+                            value={instagramURL}
+                            placeholder={instagramURL}
+                            onChange={(e) => setInstagramURL(e.target.value)}/>
+                        </div>
+
+
                         <button type="submit" className="form-button">Update</button>
                     </form>
             </div>

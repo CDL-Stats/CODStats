@@ -8,6 +8,14 @@ function CreatePlayer() {
   const [lastName, setLastName] = useState("")
   const [nickName, setNickName] = useState("")
   const [team, setTeam] = useState<any[]>([])
+  const [active, setActive] = useState(true)
+  const [primaryWeapon, setPrimaryWeapon] = useState('AR')
+  const [birthDate, setBirthDate] = useState('')
+  const [twitchURL, setTwitchURL] = useState('')
+  const [youtubeURL, setYoutubeURL] = useState('')
+  const [instagramURL, setInstagramURL] = useState('')
+  const [twitterURL, setTwitterURL] = useState('')
+  const [country, setCountry] = useState('USA')
   const [message, setMessage] = useState("");
   const [teams, setTeams] = useState([])
 
@@ -25,11 +33,19 @@ function CreatePlayer() {
     setTeam(e.target.value)
   }
 
+  let handleWeaponChange = (e: React.ChangeEvent<any>) => {
+    setPrimaryWeapon(e.target.value)
+  }
+
+  let handleCountryChange = (e: React.ChangeEvent<any>) => {
+    setCountry(e.target.value)
+  }
+
+
   useEffect(() => {
     fetchData()
   }, [])
 
-   console.log(teams)
 
   let handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -107,6 +123,67 @@ function CreatePlayer() {
                 {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
                 </select>
               </div>
+
+              <div className="form-group-row">
+                <label className='form-group-label'>Primary Weapon: </label>
+                <select onChange={handleWeaponChange} className="form-group-input"> 
+                  <option value='AR'>AR</option>
+                  <option value='Sub'>Sub</option>
+                </select>
+              </div>
+
+              <div className="form-group-row">
+                <label className='form-group-label'>Birthdate: </label>
+                <input
+                className="form-group-input"
+                type='date'
+                value={birthDate}
+                placeholder="Birthdate"
+                onChange={(e) => setBirthDate(e.target.value)}>
+                </input>
+              </div>
+
+              <div className="form-group-row">
+               <label className='form-group-label'>Twitch: </label>
+                <input
+                className="form-group-input"
+                type="text"
+                value={twitchURL}
+                placeholder="Twitch URL"
+                onChange={(e) => setTwitchURL(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group-row">
+               <label className='form-group-label'>Instagram: </label>
+                <input
+                className="form-group-input"
+                type="text"
+                value={instagramURL}
+                placeholder="Instagram URL"
+                onChange={(e) => setInstagramURL(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group-row">
+               <label className='form-group-label'>Twitter: </label>
+                <input
+                className="form-group-input"
+                type="text"
+                value={twitterURL}
+                placeholder="Twitter URL"
+                onChange={(e) => setTwitchURL(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group-row">
+                <label className='form-group-label'>Country: </label>
+                <select onChange={handleCountryChange} className="form-group-input"> 
+                  <option value='USA'>USA</option>
+                  <option value='Canada'>Canada</option>
+                </select>
+              </div>
+
 
               <button type="submit" className="form-button">Create</button>
 
