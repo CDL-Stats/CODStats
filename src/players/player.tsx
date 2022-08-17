@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import NavBar from "../navbar";
 import '../templates/form-template.css';
-import PlayerForm from "./playerform";
 
 function Player() {
     const { slug } = useParams();
