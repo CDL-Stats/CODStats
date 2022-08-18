@@ -7,7 +7,7 @@ function CreatePlayer() {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [nickName, setNickName] = useState("")
-  const [team, setTeam] = useState<any[]>([])
+  const [team, setTeam] = useState<any>([])
   const [active, setActive] = useState(true)
   const [primaryWeapon, setPrimaryWeapon] = useState('AR')
   const [birthDate, setBirthDate] = useState('')
@@ -59,7 +59,15 @@ function CreatePlayer() {
           firstName: firstName,
           lastName: lastName,
           nickName: nickName,
-          team: team,
+          teamId: parseInt(team),
+          active: active,
+          primaryWeapon: primaryWeapon,
+          birthDate: birthDate,
+          twitchURL: twitchURL,
+          youtubeURL: youtubeURL,
+          instagramURL: instagramURL,
+          twitterURL: twitterURL,
+          country: country
         }),
       });
       let resJson = await res.json();
@@ -120,7 +128,7 @@ function CreatePlayer() {
                 <label className='form-group-label'>Team: </label>
                 <select onChange={handleTeamChange} className="form-group-input"> 
                 <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
-                {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
+                {teams.map((team) => <option value={team['id']}>{team['teamName']}</option>)}
                 </select>
               </div>
 
