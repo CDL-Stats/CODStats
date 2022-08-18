@@ -5,21 +5,21 @@ import '../templates/form-template.css';
 
 function Player() {
     const { slug } = useParams();
-    const [player, setPlayer] = useState()
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState("")
-    const [nickName, setNickName] = useState("")
-    const [active, setActive] = useState(true)
-    const [primaryWeapon, setPrimaryWeapon] = useState('')
-    const [birthDate, setBirthDate] = useState('')
-    const [twitchURL, setTwitchURL] = useState('')
-    const [youtubeURL, setYoutubeURL] = useState('')
-    const [instagramURL, setInstagramURL] = useState('')
-    const [twitterURL, setTwitterURL] = useState('')
-    const [country, setCountry] = useState('')
-    const [message, setMessage] = useState("");
-    const [id, setID] = useState("");
-    const [teams, setTeams] = useState([])
+    const [player, setPlayer] = useState<string>()
+    const [firstName, setFirstName] = useState<string>()
+    const [lastName, setLastName] = useState<string>()
+    const [nickName, setNickName] = useState<string>()
+    const [active, setActive] = useState<boolean>()
+    const [primaryWeapon, setPrimaryWeapon] = useState<string>()
+    const [birthDate, setBirthDate] = useState('') // TO DO: Type protect
+    const [twitchURL, setTwitchURL] = useState<string>()
+    const [youtubeURL, setYoutubeURL] = useState<string>()
+    const [instagramURL, setInstagramURL] = useState<string>()
+    const [twitterURL, setTwitterURL] = useState<string>()
+    const [country, setCountry] = useState<string>()
+    const [message, setMessage] = useState<string>();
+    const [id, setID] = useState<Number>();
+    const [teams, setTeams] = useState([]) // TO DO: Type protect
     const [team, setTeam] = useState<any[]>([])
 
 
@@ -37,13 +37,13 @@ function Player() {
             setNickName(data['nickName'])
             setTeam(data['team'])
             setActive(data['active'])
-            setBirthDate(data[birthDate])
-            setCountry(data[country])
-            setInstagramURL(data[instagramURL])
-            setPrimaryWeapon(data[primaryWeapon])
-            setTwitchURL(data[twitchURL])
-            setTwitchURL(data[twitchURL])
-            setYoutubeURL(data[youtubeURL])
+            setBirthDate(data['birthDate'])
+            setCountry(data['country'])
+            setInstagramURL(data['instagramURL'])
+            setPrimaryWeapon(data['primaryWeapon'])
+            setTwitchURL(data['twitchURL'])
+            setTwitchURL(data['twitterURL'])
+            setYoutubeURL(data['youtubeURL'])
           })
       }
 
@@ -103,6 +103,7 @@ function Player() {
           if (res.status === 200 || res.status === 201) {
             fetchData()
             fetchTeams()
+            setMessage("Player updated successfully");
           } else {
             setMessage("Some error occured");
           }
@@ -151,8 +152,8 @@ function Player() {
               <div className="form-group-row">
                 <label className='form-group-label'>Team: </label>
                 <select onChange={handleTeamChange} className="form-group-input"> 
-                <option value={team['teamName']}>{team["teamName"]}</option>
-                {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
+                { team && <option value={team['id']}>{team["teamName"]}</option> }
+                { teams && teams.map((team) => <option value={team['id']}>{team['teamName']}</option>)}
                 </select>
               </div>
 
@@ -163,17 +164,6 @@ function Player() {
                   <option value='AR'>AR</option>
                   <option value='Sub'>Sub</option>
                 </select>
-              </div>
-
-              <div className="form-group-row">
-                <label className='form-group-label'>Birthdate: </label>
-                <input
-                className="form-group-input"
-                type='date'
-                value={birthDate}
-                placeholder="Birthdate"
-                onChange={(e) => setBirthDate(e.target.value)}>
-                </input>
               </div>
 
               <div className="form-group-row">
@@ -221,7 +211,7 @@ function Player() {
               <div className="message">{message ? <p>{message}</p> : null}</div>
           </form>
       </div>
-      <span><a href={"/teams/" + team['slug']}>Go to team</a></span>
+      {team && <span><a href={"/teams/" + team['slug']}>Go to team</a></span>}
       </div>
   </div>
     )

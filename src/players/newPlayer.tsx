@@ -4,19 +4,20 @@ import '../templates/form-template.css';
 
 
 function CreatePlayer() {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [nickName, setNickName] = useState("")
+  const current = new Date()
+  const [firstName, setFirstName] = useState<string>()
+  const [lastName, setLastName] = useState<string>()
+  const [nickName, setNickName] = useState<string>()
   const [team, setTeam] = useState<any>([])
-  const [active, setActive] = useState(true)
-  const [primaryWeapon, setPrimaryWeapon] = useState('AR')
-  const [birthDate, setBirthDate] = useState('')
-  const [twitchURL, setTwitchURL] = useState('')
-  const [youtubeURL, setYoutubeURL] = useState('')
-  const [instagramURL, setInstagramURL] = useState('')
-  const [twitterURL, setTwitterURL] = useState('')
-  const [country, setCountry] = useState('USA')
-  const [message, setMessage] = useState("");
+  const [active, setActive] = useState<boolean>(true)
+  const [primaryWeapon, setPrimaryWeapon] = useState<string>()
+  const [birthDate, setBirthDate] = useState('') // TO DO - Type enforce date
+  const [twitchURL, setTwitchURL] = useState<string>()
+  const [youtubeURL, setYoutubeURL] = useState<string>()
+  const [instagramURL, setInstagramURL] = useState<string>()
+  const [twitterURL, setTwitterURL] = useState<string>()
+  const [country, setCountry] = useState<string>('USA')
+  const [message, setMessage] = useState<string>("");
   const [teams, setTeams] = useState([])
 
   const fetchData = () => {
@@ -39,6 +40,10 @@ function CreatePlayer() {
 
   let handleCountryChange = (e: React.ChangeEvent<any>) => {
     setCountry(e.target.value)
+  }
+
+  let handleActiveChange = (e: React.ChangeEvent<any>) => {
+    setActive(e.target.value)
   }
 
 
@@ -100,41 +105,58 @@ function CreatePlayer() {
                 className="form-group-input"
                 type="text"
                 value={firstName}
+                required
                 placeholder="First Name"
                 onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
+
               <div className="form-group-row">
                 <label className='form-group-label'>Last Name: </label>
                 <input
                 className="form-group-input"
                 type="text"
+                required
                 value={lastName}
                 placeholder="Last"
                 onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
+
               <div className="form-group-row">
                <label className='form-group-label'>Nickname: </label>
                 <input
                 className="form-group-input"
                 type="text"
+                required
                 value={nickName}
                 placeholder="Nickname"
                 onChange={(e) => setNickName(e.target.value)}
                 />
               </div>
+
               <div className="form-group-row">
                 <label className='form-group-label'>Team: </label>
                 <select onChange={handleTeamChange} className="form-group-input"> 
-                <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
+                <option> -- Select a team -- </option>
                 {teams.map((team) => <option value={team['id']}>{team['teamName']}</option>)}
                 </select>
               </div>
 
               <div className="form-group-row">
+               <label className='form-group-label'>Active: </label>
+                <input
+                className="form-group-input"
+                type="checkbox"
+                checked={active}
+                onChange={handleActiveChange}
+                />
+              </div>
+
+              <div className="form-group-row">
                 <label className='form-group-label'>Primary Weapon: </label>
                 <select onChange={handleWeaponChange} className="form-group-input"> 
+                <option> -- Select a weapon -- </option>
                   <option value='AR'>AR</option>
                   <option value='Sub'>Sub</option>
                 </select>

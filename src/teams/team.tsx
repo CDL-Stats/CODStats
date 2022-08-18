@@ -9,17 +9,17 @@ import '../templates/table-template.css';
 export default function Team() {
     const [team, setTeam] = useState([])
     const [players, setPlayers] = useState([])
-    const [teamLocation, setTeamLocation] = useState('')
-    const [teamName, setTeamName] = useState('')
-    const [teamLogo, setTeamLogo] = useState('')
-    const [message, setMessage] = useState('')
-    const [primaryColor, setPrimaryColor] = useState('')
-    const [secondaryColor, setSecondaryColor] = useState('')
-    const [shortName, setShortName] = useState('')
-    const [abbreviation, setAbbreviation] = useState('')
-    const [twitterURL, setTwitterURL] = useState('')
-    const [youtubeURL, setYoutubeURL] = useState('')
-    const [instagramURL, setInstagramURL] = useState('')
+    const [teamLocation, setTeamLocation] = useState<string>()
+    const [teamName, setTeamName] = useState<string>()
+    const [teamLogo, setTeamLogo] = useState<string>()
+    const [message, setMessage] = useState<string>()
+    const [primaryColor, setPrimaryColor] = useState<string>()
+    const [secondaryColor, setSecondaryColor] = useState<string>()
+    const [shortName, setShortName] = useState<string>()
+    const [abbreviation, setAbbreviation] = useState<string>()
+    const [twitterURL, setTwitterURL] = useState<string>()
+    const [youtubeURL, setYoutubeURL] = useState<string>()
+    const [instagramURL, setInstagramURL] = useState<string>()
     
 
     const handleDelete = () => {
@@ -132,7 +132,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={teamLogo}
-                            placeholder={teamLogo}
+                            placeholder="URL for photo"
                             onChange={(e) => setTeamLogo(e.target.value)}/>
                         </div>
 
@@ -142,7 +142,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={primaryColor}
-                            placeholder={primaryColor}
+                            placeholder="primary color - use # and hex value"
                             onChange={(e) => setPrimaryColor(e.target.value)}/>
                         </div>
 
@@ -152,7 +152,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={secondaryColor}
-                            placeholder={secondaryColor}
+                            placeholder="secondary color - use # and hex value"
                             onChange={(e) => setSecondaryColor(e.target.value)}/>
                         </div>
 
@@ -162,7 +162,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={shortName}
-                            placeholder={shortName}
+                            placeholder="ex: LA Thieves"
                             onChange={(e) => setShortName(e.target.value)}/>
                         </div>
 
@@ -172,7 +172,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={abbreviation}
-                            placeholder={abbreviation}
+                            placeholder="ex: LAT"
                             onChange={(e) => setAbbreviation(e.target.value)}/>
                         </div>
 
@@ -182,7 +182,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={twitterURL}
-                            placeholder={twitterURL}
+                            placeholder="twitter url"
                             onChange={(e) => setTwitterURL(e.target.value)}/>
                         </div>
 
@@ -192,7 +192,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={youtubeURL}
-                            placeholder={youtubeURL}
+                            placeholder="youtube url"
                             onChange={(e) => setYoutubeURL(e.target.value)}/>
                         </div>
 
@@ -202,7 +202,7 @@ export default function Team() {
                             className="form-group-input"
                             type="text"
                             value={instagramURL}
-                            placeholder={instagramURL}
+                            placeholder="instagram url"
                             onChange={(e) => setInstagramURL(e.target.value)}/>
                         </div>
 

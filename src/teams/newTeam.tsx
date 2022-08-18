@@ -4,18 +4,18 @@ import '../templates/form-template.css';
 
 
 function CreateTeam() {
-  const [slug, setSlug] = useState("")
-  const [teamLocation, setTeamLocation] = useState("")
-  const [teamName, setTeamName] = useState("")
-  const [teamLogo, setTeamLogo] = useState("")
-  const [message, setMessage] = useState("")
-  const [primaryColor, setPrimaryColor] = useState('')
-  const [secondaryColor, setSecondaryColor] = useState('')
-  const [shortName, setShortName] = useState('')
-  const [abbreviation, setAbbreviation] = useState('')
-  const [twitterURL, setTwitterURL] = useState('')
-  const [youtubeURL, setYoutubeURL] = useState('')
-  const [instagramURL, setInstagramURL] = useState('')
+  const [slug, setSlug] = useState<string | undefined>()
+  const [teamLocation, setTeamLocation] = useState<string | undefined>()
+  const [teamName, setTeamName] = useState<string | undefined>()
+  const [teamLogo, setTeamLogo] = useState<string | undefined>()
+  const [message, setMessage] = useState<string | undefined>()
+  const [primaryColor, setPrimaryColor] = useState<string | undefined>()
+  const [secondaryColor, setSecondaryColor] = useState<string | undefined>()
+  const [shortName, setShortName] = useState<string | undefined>()
+  const [abbreviation, setAbbreviation] = useState<string | undefined>()
+  const [twitterURL, setTwitterURL] = useState<string | undefined>()
+  const [youtubeURL, setYoutubeURL] = useState<string | undefined>()
+  const [instagramURL, setInstagramURL] = useState<string | undefined>()
 
 
   let handleSubmit = async (e: { preventDefault: () => void; }) => {
@@ -42,10 +42,17 @@ function CreateTeam() {
       });
       let resJson = await res.json();
       if (res.status === 200 || res.status === 201) {
-        setSlug("");
-        setTeamLocation("");
-        setTeamName("");
-        setTeamLogo("");
+        setSlug(undefined)
+        setTeamLocation(undefined)
+        setTeamName(undefined)
+        setTeamLogo(undefined)
+        setPrimaryColor(undefined)
+        setSecondaryColor(undefined)
+        setShortName(undefined)
+        setAbbreviation(undefined)
+        setTwitterURL(undefined)
+        setYoutubeURL(undefined)
+        setInstagramURL(undefined)
         setMessage("Team created successfully");
       } else {
         setMessage("Some error occured");
@@ -112,7 +119,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={primaryColor}
-            placeholder={primaryColor}
+            placeholder="Primary Color - use # and hex value"
             onChange={(e) => setPrimaryColor(e.target.value)}/>
         </div>
 
@@ -122,7 +129,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={secondaryColor}
-            placeholder={secondaryColor}
+            placeholder="Secondary Color - use # and hex value"
             onChange={(e) => setSecondaryColor(e.target.value)}/>
         </div>
 
@@ -132,7 +139,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={shortName}
-            placeholder={shortName}
+            placeholder="ex: LA Thieves"
             onChange={(e) => setShortName(e.target.value)}/>
         </div>
 
@@ -142,7 +149,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={abbreviation}
-            placeholder={abbreviation}
+            placeholder="ex: LAT"
             onChange={(e) => setAbbreviation(e.target.value)}/>
         </div>
 
@@ -152,7 +159,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={twitterURL}
-            placeholder={twitterURL}
+            placeholder="twitter url"
             onChange={(e) => setTwitterURL(e.target.value)}/>
         </div>
 
@@ -162,7 +169,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={youtubeURL}
-            placeholder={youtubeURL}
+            placeholder="youtube url"
             onChange={(e) => setYoutubeURL(e.target.value)}/>
         </div>
 
@@ -172,7 +179,7 @@ function CreateTeam() {
             className="form-group-input"
             type="text"
             value={instagramURL}
-            placeholder={instagramURL}
+            placeholder="instagram url"
             onChange={(e) => setInstagramURL(e.target.value)}/>
         </div>
 
