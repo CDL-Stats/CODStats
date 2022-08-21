@@ -144,8 +144,9 @@ export default function Team() {
                             value={primaryColor}
                             placeholder="primary color - use # and hex value"
                             onChange={(e) => setPrimaryColor(e.target.value)}/>
+                          {primaryColor && <div className="colorBlock" style={{backgroundColor: primaryColor}}></div>}
                         </div>
-
+                        
                         <div className="form-group-row">
                             <label className="form-group-label">Secondary Color</label>
                             <input
@@ -154,6 +155,7 @@ export default function Team() {
                             value={secondaryColor}
                             placeholder="secondary color - use # and hex value"
                             onChange={(e) => setSecondaryColor(e.target.value)}/>
+                            {secondaryColor && <div className="colorBlock" style={{backgroundColor: secondaryColor}}></div>}
                         </div>
 
                         <div className="form-group-row">

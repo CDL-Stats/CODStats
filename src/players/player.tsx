@@ -11,7 +11,7 @@ function Player() {
     const [nickName, setNickName] = useState<string>()
     const [active, setActive] = useState<boolean>()
     const [primaryWeapon, setPrimaryWeapon] = useState<string>()
-    const [birthDate, setBirthDate] = useState('') // TO DO: Type protect
+    const [birthDate, setBirthDate] = useState<Date | null | string>()
     const [twitchURL, setTwitchURL] = useState<string>()
     const [youtubeURL, setYoutubeURL] = useState<string>()
     const [instagramURL, setInstagramURL] = useState<string>()
@@ -37,7 +37,7 @@ function Player() {
             setNickName(data['nickName'])
             setTeam(data['team'])
             setActive(data['active'])
-            setBirthDate(data['birthDate'])
+            setBirthDate(new Date(data['birthDate']).toISOString().slice(0, 10))
             setCountry(data['country'])
             setInstagramURL(data['instagramURL'])
             setPrimaryWeapon(data['primaryWeapon'])
@@ -164,6 +164,17 @@ function Player() {
                   <option value='AR'>AR</option>
                   <option value='Sub'>Sub</option>
                 </select>
+              </div>
+
+              <div className="form-group-row">
+                <label className='form-group-label'>Birthdate: </label>
+                <input
+                className="form-group-input"
+                type='date'
+                value={birthDate}
+                placeholder="Birthdate"
+                onChange={(e) => setBirthDate(e.target.value)}>
+                </input>
               </div>
 
               <div className="form-group-row">

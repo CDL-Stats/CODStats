@@ -4,23 +4,34 @@ function NavBar() {
     const [dropdown, setDropdown] = useState(false)
     const [athleteDropdown, setAthletedDropdown] = useState(false)
     const [teamDropdown, setTeamDropdown] = useState(false)
+    const [tournamentsDropdown, setTournamentsDropdown] = useState(false)
 
     const handleHover = () => {
         setDropdown(current => !current)
         setAthletedDropdown(false)
         setTeamDropdown(false)
+        setTournamentsDropdown(false)
       }
     
       const handleAthlete = () => {
         setAthletedDropdown(current => !current)
         setDropdown(false)
         setTeamDropdown(false)
+        setTournamentsDropdown(false)
       }
     
       const handleTeam = () => {
         setTeamDropdown(current => !current)
         setDropdown(false)
         setAthletedDropdown(false)
+        setTournamentsDropdown(false)
+      }
+
+      const handleTournaments = () => {
+        setTournamentsDropdown(current => !current)
+        setDropdown(false)
+        setAthletedDropdown(false)
+        setTeamDropdown(false)
       }
 
       return (
@@ -67,7 +78,24 @@ function NavBar() {
                     </li>
                   </ul>
                 </div>
-              </li>                <li><a href='#' className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md'>Tournaments</a></li>
+                </li>
+                <li className={`relative`}>
+                <button className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md outline-none focus:outline-none' onClick={handleTournaments}>Tournaments</button>
+                <div className={`right-0 p-2 mt-1 bg-white rounded-md shadow lg:absolute ${tournamentsDropdown ? 'flex flex-col' : 'hidden'}`}>
+                  <ul className='space-y-2 lg:w-48'>
+                    <li>
+                      <a href='/tournaments' className='flex p-2 font-medium text-gray-600 rounded-md  hover:bg-gray-100 hover:text-black'>
+                        Tournaments
+                      </a>
+                    </li>
+                    <li>
+                      <a href='/tournaments/new' className='flex p-2 font-medium text-gray-600 rounded-md  hover:bg-gray-100 hover:text-black'>
+                        Create Tournament
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                </li>
             </ul>
           </div>
         </div>

@@ -121,6 +121,7 @@ function CreateTeam() {
             value={primaryColor}
             placeholder="Primary Color - use # and hex value"
             onChange={(e) => setPrimaryColor(e.target.value)}/>
+            {primaryColor && <div className="colorBlock" style={{backgroundColor: primaryColor}}></div>}
         </div>
 
         <div className="form-group-row">
@@ -131,6 +132,7 @@ function CreateTeam() {
             value={secondaryColor}
             placeholder="Secondary Color - use # and hex value"
             onChange={(e) => setSecondaryColor(e.target.value)}/>
+            {secondaryColor && <div className="colorBlock" style={{backgroundColor: secondaryColor}}></div>}
         </div>
 
         <div className="form-group-row">
