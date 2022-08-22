@@ -14,6 +14,9 @@ import CreatePlayer from './players/newPlayer';
 import Tournaments from './tournaments/tournaments';
 import CreateTournament from './tournaments/newTournament';
 import Tournament from './tournaments/tournament';
+import Season from './seasons/season';
+import CreateSeason from './seasons/newSeason';
+import Seasons from './seasons/seasons';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,6 +34,9 @@ root.render(
       <Route path="tournaments" element={<Tournaments />}/>
       <Route path="tournaments/new" element={<CreateTournament />}/>
       <Route path="tournament/:id" element={<Tournament />}/>
+      <Route path="season" element={<Seasons />}/>
+      <Route path="season/new" element={<CreateSeason />}/>
+      <Route path="season/:id" element={<Season />}/>
     </Routes>
   </BrowserRouter>
 );

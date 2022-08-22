@@ -5,12 +5,14 @@ function NavBar() {
     const [athleteDropdown, setAthletedDropdown] = useState(false)
     const [teamDropdown, setTeamDropdown] = useState(false)
     const [tournamentsDropdown, setTournamentsDropdown] = useState(false)
+    const [other, setOther] = useState(false)
 
     const handleHover = () => {
         setDropdown(current => !current)
         setAthletedDropdown(false)
         setTeamDropdown(false)
         setTournamentsDropdown(false)
+        setOther(false)
       }
     
       const handleAthlete = () => {
@@ -18,6 +20,7 @@ function NavBar() {
         setDropdown(false)
         setTeamDropdown(false)
         setTournamentsDropdown(false)
+        setOther(false)
       }
     
       const handleTeam = () => {
@@ -25,6 +28,7 @@ function NavBar() {
         setDropdown(false)
         setAthletedDropdown(false)
         setTournamentsDropdown(false)
+        setOther(false)
       }
 
       const handleTournaments = () => {
@@ -32,6 +36,15 @@ function NavBar() {
         setDropdown(false)
         setAthletedDropdown(false)
         setTeamDropdown(false)
+        setOther(false)
+      }
+
+      const handleOther = () => {
+        setOther(current => !current)
+        setDropdown(false)
+        setAthletedDropdown(false)
+        setTeamDropdown(false)
+        setTournamentsDropdown(false)
       }
 
       return (
@@ -45,6 +58,7 @@ function NavBar() {
           </button> 
           <div className={`w-full lg:inline-flex lg:w-auto mt-2 lg:mt-0 ${dropdown ? '' : 'hidden'}`}>
             <ul className='flex flex-col w-full space-y-2 lg:w-auto lg:flex-row lg:space-y-0 lg:space-x-2'>
+              
               <li className={`relative`}>
                 <button className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md outline-none focus:outline-none' onClick={handleAthlete}>Players</button>
                 <div className={`right-0 p-2 mt-1 bg-white rounded-md shadow lg:absolute ${athleteDropdown ? 'flex flex-col' : 'hidden'}`}>
@@ -62,6 +76,7 @@ function NavBar() {
                   </ul>
                 </div>
               </li>
+
               <li className={`relative`}>
                 <button className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md outline-none focus:outline-none' onClick={handleTeam}>Teams</button>
                 <div className={`right-0 p-2 mt-1 bg-white rounded-md shadow lg:absolute ${teamDropdown ? 'flex flex-col' : 'hidden'}`}>
@@ -79,6 +94,7 @@ function NavBar() {
                   </ul>
                 </div>
                 </li>
+
                 <li className={`relative`}>
                 <button className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md outline-none focus:outline-none' onClick={handleTournaments}>Tournaments</button>
                 <div className={`right-0 p-2 mt-1 bg-white rounded-md shadow lg:absolute ${tournamentsDropdown ? 'flex flex-col' : 'hidden'}`}>
@@ -96,6 +112,20 @@ function NavBar() {
                   </ul>
                 </div>
                 </li>
+
+                <li className={`relative`}>
+                <button className='flex px-4 py-2 font-medium text-white hover:bg-blue-800 rounded-md outline-none focus:outline-none' onClick={handleOther}>Other</button>
+                <div className={`right-0 p-2 mt-1 bg-white rounded-md shadow lg:absolute ${other ? 'flex flex-col' : 'hidden'}`}>
+                  <ul className='space-y-2 lg:w-48'>
+                    <li>
+                      <a href='/season' className='flex p-2 font-medium text-gray-600 rounded-md  hover:bg-gray-100 hover:text-black'>
+                        Seasons
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                </li>
+
             </ul>
           </div>
         </div>

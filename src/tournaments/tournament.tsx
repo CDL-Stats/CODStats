@@ -15,15 +15,21 @@ function Tournament() {
   const [purseSize, setPurseSize] = useState<number | undefined>()
   const [city, setCity] = useState<string | undefined>()
   const [message, setMessage] = useState<string | undefined>()
+  const [seasons, setSeasons] = useState([])
+  const [season, setSeason] = useState<any>()
 
   const handleDelete = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/teams/${id}`, { method: 'DELETE' })
+    fetch(`${process.env.REACT_APP_API_URL}/season/${id}`, { method: 'DELETE' })
 }
 
   let handleTypeChange = (e: React.ChangeEvent<any>) => {
     setType(e.target.value)
   }
 
+  let handleSeasonChange = (e: React.ChangeEvent<any>) => {
+    setSeason(e.target.value)
+    console.log(season)
+  }
 
   let handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -42,11 +48,13 @@ function Tournament() {
             teamSize: teamSize,
             purseSize: purseSize,
             city: city,
+            season: season,
         }),
       });
       let resJson = await res.json();
       if (res.status === 200 || res.status === 201) {
         fetchData()
+        setMessage("Tournament successfully updated");
       } else {
         setMessage("Some error occured");
       }
@@ -69,11 +77,23 @@ function Tournament() {
         setTeamSize(data['teamSize'])
         setPurseSize(data['purseSize'])
         setCity(data['city'])
+        setSeason(data['season'])
+      })
+  }
+
+  const fetchSeasons = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/season`)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setSeasons(data)
       })
   }
 
   useEffect(() => {
     fetchData()
+    fetchSeasons()
     console.log(startDate)
   }, [])
 
@@ -116,6 +136,14 @@ function Tournament() {
               placeholder="End Date"
               onChange={(e) => setEndDate(e.target.value)}
             />
+          </div>
+
+          <div className="form-group-row">
+            <label className='form-group-label'>Season: </label>
+                <select onChange={handleSeasonChange} className="form-group-input">
+                <option></option>
+                {seasons.map((s) => <option value={s['id']} selected={s['id'] === season? true : false}>{s['title']}</option>)}
+                </select>
           </div>
 
           <div className='form-group-row'>
@@ -161,7 +189,7 @@ function Tournament() {
             onChange={(e) => setCity(e.target.value)}/>
         </div>
 
-          <button type="submit" className="form-button">Create</button>
+          <button type="submit" className="form-button">Update</button>
 
           <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>

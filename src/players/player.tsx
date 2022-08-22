@@ -152,8 +152,7 @@ function Player() {
               <div className="form-group-row">
                 <label className='form-group-label'>Team: </label>
                 <select onChange={handleTeamChange} className="form-group-input"> 
-                { team && <option value={team['id']}>{team["teamName"]}</option> }
-                { teams && teams.map((team) => <option value={team['id']}>{team['teamName']}</option>)}
+                { teams && teams.map((t) => <option value={t['id']} selected={t['id'] === team['id'] ? true : false}>{t['teamName']}</option>)}
                 </select>
               </div>
 

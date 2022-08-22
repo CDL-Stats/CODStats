@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../navbar';
 import '../templates/form-template.css';
 
@@ -12,11 +12,26 @@ function CreateTournament() {
   const [purseSize, setPurseSize] = useState<number | undefined>()
   const [city, setCity] = useState<string | undefined>()
   const [message, setMessage] = useState<string | undefined>()
+  const [seasons, setSeasons] = useState([])
+  const [season, setSeason] = useState<number | undefined>()
+
+  const fetchData = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/season`)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setSeasons(data)
+      })
+  }
 
   let handleTypeChange = (e: React.ChangeEvent<any>) => {
     setType(e.target.value)
   }
 
+  let handleSeasonChange = (e: React.ChangeEvent<any>) => {
+    setSeason(e.target.value)
+  }
 
   let handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -54,6 +69,10 @@ function CreateTournament() {
     }
   };
 
+  useEffect(() => {
+    fetchData()
+  }, [])
+
 
 
 
@@ -64,6 +83,7 @@ function CreateTournament() {
       <div className='form-body'>
       <h1 className="form-header">Create Tournament</h1>
         <form onSubmit={handleSubmit}>
+
           <div className="form-group-row">
             <label className='form-group-label'>Type: </label>
                 <select onChange={handleTypeChange} className="form-group-input">
@@ -93,6 +113,13 @@ function CreateTournament() {
               placeholder="End Date"
               onChange={(e) => setEndDate(e.target.value)}
             />
+          </div>
+
+          <div className="form-group-row">
+            <label className='form-group-label'>Season: </label>
+                <select onChange={handleSeasonChange} className="form-group-input">
+                {seasons.map((s) => <option value={s['id']}>{s['title']}</option>)}
+                </select>
           </div>
 
           <div className='form-group-row'>
