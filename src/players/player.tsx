@@ -11,7 +11,7 @@ function Player() {
     const [nickName, setNickName] = useState<string>()
     const [active, setActive] = useState<boolean>()
     const [primaryWeapon, setPrimaryWeapon] = useState<string>()
-    const [birthDate, setBirthDate] = useState('')
+    const [birthDate, setBirthDate] = useState<Date|null|string>()
     const [twitchURL, setTwitchURL] = useState<string>()
     const [youtubeURL, setYoutubeURL] = useState<string>()
     const [instagramURL, setInstagramURL] = useState<string>()
