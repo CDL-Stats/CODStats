@@ -9,8 +9,8 @@ import '../templates/form-template.css';
 
 function Tournament() {
   const [type, setType] = useState<string>('regular_season')
-  const [startDate, setStartDate] =  useState<Date | null | string>()
-  const [endDate, setEndDate] =  useState<Date | null | string>()
+  const [startDate, setStartDate] =  useState<string>()
+  const [endDate, setEndDate] =  useState<string>()
   const [name, setName] = useState<string | undefined>()
   const [teamSize, setTeamSize] = useState<number | undefined>()
   const [purseSize, setPurseSize] = useState<number | undefined>()
