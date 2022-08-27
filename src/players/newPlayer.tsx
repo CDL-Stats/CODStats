@@ -11,7 +11,7 @@ function CreatePlayer() {
   const [team, setTeam] = useState<any>([])
   const [active, setActive] = useState<boolean>(true)
   const [primaryWeapon, setPrimaryWeapon] = useState<string>()
-  const [birthDate, setBirthDate] = useState<Date|null|string|undefined>()
+  const [birthDate, setBirthDate] = useState<string>()
   const [twitchURL, setTwitchURL] = useState<string>()
   const [youtubeURL, setYoutubeURL] = useState<string>()
   const [instagramURL, setInstagramURL] = useState<string>()
