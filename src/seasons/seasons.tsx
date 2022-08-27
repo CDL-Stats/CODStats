@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../navbar";
 import '../templates/form-template.css';
 import '../templates/table-template.css';
+import Tournament from "../tournaments/tournament";
 import Season from "./season";
 
 function Seasons() {

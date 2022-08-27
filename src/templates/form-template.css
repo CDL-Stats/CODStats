@@ -35,7 +35,7 @@
 }
 
 .form-button{
-    background-color: #74c0fc;
+    background-color: #1c7ed6;
     border: none;
     color: white;
     text-align: center;
@@ -43,7 +43,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-
+    margin-bottom: 20px;
 }
 
 .colorBlock{
@@ -56,4 +56,9 @@
 .form-sub-header{
     font-size: 18px;
     margin-bottom: 20px;
+}
+
+.non-div{
+    margin-top: 20px;
+    width: 200px;
 }

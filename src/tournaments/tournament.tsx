@@ -1,12 +1,13 @@
+import { match } from 'assert';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { start } from 'repl';
 import NavBar from '../navbar';
 import '../templates/form-template.css';
 
 
 function Tournament() {
-    const [tournament, setTournament] = useState<object | undefined>()
   const [type, setType] = useState<string>('regular_season')
   const [startDate, setStartDate] =  useState<Date | null | string>()
   const [endDate, setEndDate] =  useState<Date | null | string>()
@@ -17,6 +18,8 @@ function Tournament() {
   const [message, setMessage] = useState<string | undefined>()
   const [seasons, setSeasons] = useState([])
   const [season, setSeason] = useState<any>()
+  const [matches, setMatches] = useState([])
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     fetch(`${process.env.REACT_APP_API_URL}/season/${id}`, { method: 'DELETE' })
@@ -69,7 +72,6 @@ function Tournament() {
         return response.json()
       })
       .then(data => {
-        setTournament(data)
         setType(data['type'])
         setStartDate(new Date(data['startDate']).toISOString().slice(0, 10))
         setEndDate(new Date(data['endDate']).toISOString().slice(0, 10))
@@ -91,13 +93,27 @@ function Tournament() {
       })
   }
 
+  const fetchMatches = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/match?tournament=${id}`)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setMatches(data)
+      })
+  }
+
   useEffect(() => {
     fetchData()
     fetchSeasons()
-    console.log(startDate)
+    fetchMatches()
   }, [])
 
   const { id } = useParams();
+
+  const toNewMatch=()=>{
+    navigate(`/match/new?tournament=${id}`,{state:{tournamentTest:id}});
+      }
 
 
   return (
@@ -193,7 +209,28 @@ function Tournament() {
 
           <div className="message">{message ? <p>{message}</p> : null}</div>
         </form>
+        <button onClick={() => toNewMatch()} className="form-button non-div">New Match</button>
       </div>
+      <div className="form-body">
+                <h2 className="form-header">Players</h2>
+                <table className='table-striped'>
+                    <thead>
+                        <tr className="table-header">
+                            <th>Match ID</th>
+                            <th>Round</th>
+                            <th>Teams</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {matches.map(match => 
+                        <tr> 
+                            <td><a href={"/match/" + match['id']}>{match['id']}</a></td>
+                            <td>{match['round']}</td>
+                            <td>{match['teams'][0]['shortName']} vs. {match['teams'][1]['shortName']}</td></tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
       </div>
     </div>
   )};

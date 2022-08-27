@@ -29,7 +29,7 @@ export default function Team() {
     let handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
-          let res = await fetch(`${process.env.REACT_APP_API_URL}/team/${slug}`, {
+          let res = await fetch(`${process.env.REACT_APP_API_URL}/teams/${slug}`, {
             method: "PATCH",
             headers: {
               'Content-Type': 'application/json; charset=utf-8'
@@ -50,6 +50,7 @@ export default function Team() {
           });
           let resJson = await res.json();
           if (res.status === 200 || res.status === 201) {
+            setMessage("Team updated successfully");
             fetchData()
           } else {
             setMessage("Some error occured");
@@ -210,6 +211,7 @@ export default function Team() {
 
 
                         <button type="submit" className="form-button">Update</button>
+                        <div className="message">{message ? <p>{message}</p> : null}</div>
                     </form>
             </div>
             <div className="form-body">
