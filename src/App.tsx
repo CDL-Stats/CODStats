@@ -67,38 +67,39 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <body className='bg-gray-100'>
-        <span className= 'text-3xl font-bold underline'>Create Player</span>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={firstName}
-            placeholder="First Name"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <input
-            type="text"
-            value={lastName}
-            placeholder="Last"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <input
-            type="text"
-            value={nickName}
-            placeholder="Nickname"
-            onChange={(e) => setNickName(e.target.value)}
-          />
-          <select onChange={handleTeamChange}> 
-            <option value="⬇️ Select a team ⬇️"> -- Select a team -- </option>
-            {teams.map((team) => <option value={team['slug']}>{team['teamName']}</option>)}
-          </select>
+      <div className="form-body">
+        <h2 className="form-header">Players</h2>
+        <table className='table-striped'>
+          <thead>
+            <tr className="table-header">
+              <th>Index</th>
+              <th>Create</th>
+            </tr>
+          </thead>
+          <tbody>
 
+            <tr>
+              <td><a href='players'>Players</a></td>
+              <td><a href='players/new'>New Players</a></td>
+            </tr>
 
-          <button type="submit">Create</button>
+            <tr>
+              <td><a href='/season'>Seasons</a></td>
+              <td><a href='season/new'>New Season</a></td>
+            </tr>
 
-          <div className="message">{message ? <p>{message}</p> : null}</div>
-        </form>
-      </body>
+            <tr>
+              <td><a href='/teams'>Teams</a></td>
+              <td><a href='/teams/new'>New Team</a></td>
+            </tr>
+
+            <tr>
+              <td><a href='/tournaments'>Tournaments</a></td>
+              <td><a href='/tournaments/new'>New Tournament</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   )};
 
