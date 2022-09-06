@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import NavBar from "../navbar";
 
 export default function CreateMap() {
-  const [name, setName] = useState<string | null>();
+  const [name, setName] = useState<string | undefined>();
   const [season, setSeason] = useState<number>();
   const [seasons, setSeasons] = useState([]);
   const [message, setMessage] = useState("");
