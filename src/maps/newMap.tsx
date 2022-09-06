@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import NavBar from "../navbar";
 
 export default function CreateMap() {
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string | null>();
   const [season, setSeason] = useState<number>();
   const [seasons, setSeasons] = useState([]);
   const [message, setMessage] = useState("");
@@ -48,8 +48,7 @@ export default function CreateMap() {
       });
       let resJson = await res.json();
       if (res.status === 200 || res.status === 201) {
-        setName(undefined);
-        setSeason(undefined);
+        setName("");
         setMessage("Map created successfully");
       } else {
         setMessage("Some error occured");
@@ -66,13 +65,13 @@ export default function CreateMap() {
           <h1 className='form-header'>Create Map</h1>
           <form onSubmit={handleSubmit}>
             <div className='form-group-row'>
-              <label className='form-group-label'>First Name: </label>
+              <label className='form-group-label'>Name: </label>
               <input
                 className='form-group-input'
                 type='text'
                 value={name}
                 required
-                placeholder='First Name'
+                placeholder='Name'
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
