@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import NavBar from "../navbar";
-import "../templates/form-template.css";
+import "../templates/form-template.scss";
 
 function Season() {
   const { id } = useParams();

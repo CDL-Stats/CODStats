@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { start } from "repl";
 import NavBar from "../navbar";
-import "../templates/form-template.css";
+import "../templates/form-template.scss";
 
 function Tournament() {
   const [type, setType] = useState<string>("regular_season");
@@ -124,7 +124,7 @@ function Tournament() {
       <NavBar />
       <div className='form-wrapper'>
         <div className='form-body'>
-          <h1 className='form-header'>Create Tournament</h1>
+          <h1 className='form-header'>Tournament</h1>
           <form onSubmit={handleSubmit}>
             <div className='form-group-row'>
               <label className='form-group-label'>Type: </label>
@@ -219,18 +219,21 @@ function Tournament() {
               />
             </div>
 
-            <button type='submit' className='form-button'>
-              Update
-            </button>
+            <div className='button-container'>
+              <button type='submit' className='form-button'>
+                Update
+              </button>
+
+              <button onClick={() => toNewMatch()} className='form-button new'>
+                New Match
+              </button>
+            </div>
 
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
-          <button onClick={() => toNewMatch()} className='form-button non-div'>
-            New Match
-          </button>
         </div>
         <div className='form-body'>
-          <h2 className='form-header'>Players</h2>
+          <h2 className='form-header'>Rounds</h2>
           <table className='table-striped'>
             <thead>
               <tr className='table-header'>
@@ -246,7 +249,7 @@ function Tournament() {
                     <td>
                       <a href={"/match/" + match["id"]}>{match["id"]}</a>
                     </td>
-                    <td>{match["round"]}</td>
+                    <td>{match["tournamentRound"]}</td>
                     <td>
                       {match["teams"][0]["team_teamName"]} vs.{" "}
                       {match["teams"][1]["team_teamName"]}

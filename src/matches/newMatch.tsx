@@ -84,7 +84,7 @@ export default function CreateMatch() {
         },
         body: JSON.stringify({
           tournament: tournament,
-          round: round,
+          tournamentRound: round,
           roundID: roundID,
           bestOf: bestOf,
           teams: [parseInt(teamOne), parseInt(teamTwo)],
@@ -189,10 +189,14 @@ export default function CreateMatch() {
                 ))}
               </select>
             </div>
-
-            <button type='submit' className='form-button'>
-              Create
-            </button>
+            <div className='button-container'>
+              <button type='submit' className='form-button'>
+                Create
+              </button>
+              <button type='submit' className='form-button new'>
+                Create &amp; Add More
+              </button>
+            </div>
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
         </div>

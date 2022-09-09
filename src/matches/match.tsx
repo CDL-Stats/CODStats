@@ -6,6 +6,7 @@ import NavBar from "../navbar";
 export default function Match() {
   const { id } = useParams<string>();
   const [match, setMatch] = useState({});
+  const [rounds, setRounds] = useState([]);
   const [tournament, setTournament] = useState<any[]>([]);
   const [tournaments, setTournaments] = useState([]);
   const [round, setRound] = useState<string>();
@@ -51,6 +52,20 @@ export default function Match() {
       });
   };
 
+  const fetchRounds = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/rounds/match/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setRounds(data);
+      });
+  };
+
+  const toNewRound = () => {
+    navigate(`/rounds/new/match/${id}`, { state: { match: id } });
+  };
+
   const fetchData = () => {
     fetch(`${process.env.REACT_APP_API_URL}/matches?ids=${id}`)
       .then((response) => {
@@ -59,7 +74,7 @@ export default function Match() {
       .then((data) => {
         const firstRow = data[0];
         setMatch(firstRow);
-        setRound(firstRow["round"]);
+        setRound(firstRow["tournamentRound"]);
         setRoundID(firstRow["roundID"]);
         setBestOf(firstRow["bestOf"]);
         setTournament(firstRow["tournament"]);
@@ -108,7 +123,7 @@ export default function Match() {
         body: JSON.stringify({
           id: numberID,
           tournament: tournament,
-          round: round,
+          tournamentRound: round,
           roundID: roundID,
           bestOf: bestOf,
           teams: [teamOneSmall, teamTwoSmall],
@@ -127,9 +142,17 @@ export default function Match() {
   useEffect(() => {
     fetchTeams();
     fetchData();
+    fetchRounds();
     fetchTournaments();
     const teamOneID = teamOne["id"];
   }, []);
+
+  const handleDelete = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/matches/${id}`, {
+      method: "DELETE",
+    });
+    navigate("/tournaments");
+  };
 
   let handleClone = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -164,7 +187,10 @@ export default function Match() {
       <NavBar />
       <div className='form-wrapper'>
         <div className='form-body'>
-          <h1 className='form-header'>MATCH</h1>
+          <a href={`/tournament/${tournament["id"]}`} className='backlink'>
+            Back to {tournament["name"]}
+          </a>
+          <h1 className='form-header'>Match</h1>
           <form>
             <div className='form-group-row'>
               <label className='form-group-label'>Team: </label>
@@ -260,7 +286,7 @@ export default function Match() {
               </select>
             </div>
 
-            <div>
+            <div className='button-container'>
               <button
                 type='submit'
                 className='form-button'
@@ -268,18 +294,48 @@ export default function Match() {
               >
                 Update
               </button>
-            </div>
-            <div>
-              <button
-                type='submit'
-                className='form-button'
-                onClick={handleClone}
-              >
+              <button className='form-button clone' onClick={handleClone}>
                 Clone
               </button>
+
+              <button className='form-button delete' onClick={handleDelete}>
+                Delete
+              </button>
+
+              <button
+                onClick={() => toNewRound()}
+                className='form-button non-div new'
+              >
+                New Round
+              </button>
             </div>
+
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
+
+          <div className='form-body'>
+            <h2 className='form-header'>Rounds</h2>
+            <table className='table-striped'>
+              <thead>
+                <tr className='table-header'>
+                  <th>Round</th>
+                  <th>Game Mode</th>
+                  <th>Map</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rounds.map((round, index) => (
+                  <tr>
+                    <td>
+                      <a href={`/rounds/${round["id"]}`}>{index + 1}</a>
+                    </td>
+                    <td>{round["game"]}</td>
+                    <td>{round["map"]["name"]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
