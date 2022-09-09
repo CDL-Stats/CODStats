@@ -193,9 +193,6 @@ export default function CreateMatch() {
               <button type='submit' className='form-button'>
                 Create
               </button>
-              <button type='submit' className='form-button new'>
-                Create &amp; Add More
-              </button>
             </div>
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>

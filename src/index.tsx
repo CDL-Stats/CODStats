@@ -23,6 +23,7 @@ import CreateMap from "./maps/newMap";
 import CODMap from "./maps/map";
 import CreateRound from "./rounds/newRound";
 import Round from "./rounds/round";
+import CreatePlayerRound from "./roundPlayer/newRoundPlayer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -49,6 +50,7 @@ root.render(
       <Route path='maps/:id' element={<CODMap />} />
       <Route path='rounds/new/match/:id' element={<CreateRound />} />
       <Route path='rounds/:id' element={<Round />} />
+      <Route path='/playerstats/new/:id' element={<CreatePlayerRound />} />
     </Routes>
   </BrowserRouter>
 );

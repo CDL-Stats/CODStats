@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import NavBar from "../navbar";
 
 export default function Round() {
+  const [data, setData] = useState({});
   const [gameMap, setMap] = useState<object>({});
   const [match, setMatch] = useState<Number>(0);
   const [game, setGame] = useState();
@@ -54,6 +55,7 @@ export default function Round() {
       })
       .then((data) => {
         const firstRow = data[0];
+        setData(data);
         setGame(firstRow["game"]);
         setMatch(firstRow["match"]);
         setMap(firstRow["map"]);
@@ -96,6 +98,10 @@ export default function Round() {
     } catch (err) {
       // console.log(err);
     }
+  };
+
+  let routeToPlayerStat = (id: number) => {
+    navigate(`/playerstats/new/${id}`);
   };
 
   return (
@@ -180,6 +186,23 @@ export default function Round() {
 
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
+          <div>
+            <h2>{teamOne["teamName"]}</h2>
+            <button
+              className='form-button'
+              onClick={() => routeToPlayerStat(data["team"][0]["id"])}
+            >
+              Add Player
+            </button>
+
+            <h2>{teamTwo["teamName"]}</h2>
+            <button
+              className='form-button'
+              onClick={() => routeToPlayerStat(data["team"][1]["id"])}
+            >
+              Add Player
+            </button>
+          </div>
         </div>
       </div>
     </div>
