@@ -107,7 +107,7 @@ export default function Team() {
           <h1 className='form-header'>
             {team["teamLocation"]} {team["teamName"]}
           </h1>
-          <div>
+          <div className='sub-links'>
             <a href={`/teams/${slug}/history`}>Roster History</a>
           </div>
           <form onSubmit={handleSubmit} className=''>

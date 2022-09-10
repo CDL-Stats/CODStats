@@ -26,6 +26,7 @@ import Round from "./rounds/round";
 import CreatePlayerRound from "./roundPlayer/newRoundPlayer";
 import TeamHistory from "./teams/teamHistoryIndex";
 import TeamHistoryPage from "./teams/teamHistoryPage";
+import UpdatePlayerRound from "./roundPlayer/RoundPlayer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -55,6 +56,10 @@ root.render(
       <Route path='rounds/new/match/:id' element={<CreateRound />} />
       <Route path='rounds/:id' element={<Round />} />
       <Route path='/playerstats/new/:id' element={<CreatePlayerRound />} />
+      <Route
+        path='/playerstats/:id/player/:playerstat'
+        element={<UpdatePlayerRound />}
+      />
     </Routes>
   </BrowserRouter>
 );

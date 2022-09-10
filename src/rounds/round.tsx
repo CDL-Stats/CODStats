@@ -16,6 +16,8 @@ export default function Round() {
   const [pointsTwo, setPointsTwo] = useState<number>();
   const [teamOneWin, setTeamOneWin] = useState<boolean>(false);
   const [teamTwoWin, setTeamTwoWin] = useState<boolean>(false);
+  const [playerStatsOne, setPlayerStats] = useState([]);
+  const [playerStatsTwo, setPlayerStatsTwo] = useState([]);
 
   const navigate = useNavigate();
   const { id } = useParams<string>();
@@ -48,6 +50,17 @@ export default function Round() {
       });
   };
 
+  const fetchPlayerStats = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/round-player/round/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPlayerStats(data["one"]);
+        setPlayerStatsTwo(data["two"]);
+      });
+  };
+
   const fetchData = () => {
     fetch(`${process.env.REACT_APP_API_URL}/rounds/${id}`)
       .then((response) => {
@@ -71,6 +84,7 @@ export default function Round() {
   useEffect(() => {
     fetchData();
     fetchMaps();
+    fetchPlayerStats();
   }, []);
 
   let handleSubmit = async (e: { preventDefault: () => void }) => {
@@ -188,6 +202,30 @@ export default function Round() {
           </form>
           <div>
             <h2>{teamOne["teamName"]}</h2>
+            {playerStatsOne && (
+              <table className='table-striped'>
+                <thead>
+                  <tr className='table-header'>
+                    <th>Nickname</th>
+                    <th>Kills</th>
+                    <th>Deaths</th>
+                    <th>Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {playerStatsOne.map((p) => (
+                    <tr>
+                      <td>{p["nickName"]}</td>
+                      <td>{p["kills"]}</td>
+                      <td>{p["deaths"]}</td>
+                      <a href={`/playerstats/${p["teamID"]}/player/${p["id"]}`}>
+                        Edit
+                      </a>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             <button
               className='form-button'
               onClick={() => routeToPlayerStat(data["team"][0]["id"])}
@@ -196,6 +234,34 @@ export default function Round() {
             </button>
 
             <h2>{teamTwo["teamName"]}</h2>
+            {playerStatsTwo && (
+              <table className='table-striped'>
+                <thead>
+                  <tr className='table-header'>
+                    <th>Nickname</th>
+                    <th>Kills</th>
+                    <th>Deaths</th>
+                    <th>Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {playerStatsTwo.map((p) => (
+                    <tr>
+                      <td>{p["nickName"]}</td>
+                      <td>{p["kills"]}</td>
+                      <td>{p["deaths"]}</td>
+                      <td>
+                        <a
+                          href={`/playerstats/${p["teamID"]}/player/${p["id"]}`}
+                        >
+                          Edit
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             <button
               className='form-button'
               onClick={() => routeToPlayerStat(data["team"][1]["id"])}

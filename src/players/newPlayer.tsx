@@ -62,7 +62,7 @@ function CreatePlayer() {
           firstName: firstName,
           lastName: lastName,
           nickName: nickName,
-          teamId: parseInt(team),
+          team: parseInt(team),
           active: active,
           primaryWeapon: primaryWeapon,
           birthDate: birthDate,

@@ -51,7 +51,7 @@ export default function TeamHistory() {
             <tbody>
               {seasons.map((season) => (
                 <tr>
-                  <a href={`/teams/${slug}/history/${season["id"]}`}>
+                  <a href={`/teams/history/${team["id"]}/${season["id"]}`}>
                     <td>{season["year"]}</td>
                   </a>
                   <td>{season["title"]}</td>

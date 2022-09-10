@@ -25,7 +25,9 @@ export default function TeamHistoryPage() {
   };
 
   const fetchRoster = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/player-history/${id}/${season}`)
+    fetch(
+      `${process.env.REACT_APP_API_URL}/player-history/team/${id}/${season}`
+    )
       .then((response) => {
         return response.json();
       })
@@ -38,6 +40,10 @@ export default function TeamHistoryPage() {
     fetchPlayers();
     fetchRoster();
   }, []);
+
+  let result =
+    roster["players"] && roster["players"].map((a: []) => a["playerID"]);
+  console.log(result);
 
   let handlePlayerChange = (e: React.ChangeEvent<any>) => {
     setPlayer(e.target.value);
@@ -60,6 +66,7 @@ export default function TeamHistoryPage() {
       let resJson = await res.json();
       if (res.status === 200 || res.status === 201) {
         setMessage("Player updated successfully");
+        fetchRoster();
       } else {
         setMessage("Some error occured");
       }
@@ -67,8 +74,6 @@ export default function TeamHistoryPage() {
       // console.log(err);
     }
   };
-
-  console.log(roster);
 
   return (
     <div>
@@ -105,10 +110,15 @@ export default function TeamHistoryPage() {
                 onChange={handlePlayerChange}
                 className='form-group-input'
               >
+                <option> -- Select a player -- </option>
                 {players &&
-                  players.map((p) => (
-                    <option value={p["id"]}>{p["nickName"]}</option>
-                  ))}
+                  result &&
+                  players.map(
+                    (p) =>
+                      !result.includes(p["id"]) && (
+                        <option value={p["id"]}>{p["nickName"]}</option>
+                      )
+                  )}
               </select>
             </div>
             <button type='submit' className='form-button'>

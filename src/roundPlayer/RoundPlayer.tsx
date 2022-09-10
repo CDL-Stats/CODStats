@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import NavBar from "../navbar";
-import Tournament from "../tournaments/tournament";
 
-export default function CreatePlayerRound() {
-  const { id } = useParams<string>();
+export default function UpdatePlayerRound() {
+  const { id, playerstat } = useParams();
+  const [data, setData] = useState([]);
   const [kills, setKills] = useState<number>();
   const [deaths, setDeaths] = useState<number>();
   const [assists, setAssists] = useState<number>();
@@ -20,6 +20,8 @@ export default function CreatePlayerRound() {
 
   const navigate = useNavigate();
 
+  console.log(playerstat);
+
   const fetchPlayers = () => {
     fetch(`${process.env.REACT_APP_API_URL}/player-history/round/${id}`)
       .then((response) => {
@@ -27,6 +29,23 @@ export default function CreatePlayerRound() {
       })
       .then((data) => {
         setPlayers(data);
+      });
+  };
+
+  const fetchData = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/round-player/${playerstat}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+        setPlayer(data[0]["playerId"]);
+        setKills(data[0]["kills"]);
+        setDeaths(data[0]["deaths"]);
+        setAssists(data[0]["assists"]);
+        setNTK(data[0]["nonTradedKills"]);
+        setStreak(data[0]["highestStreak"]);
+        setDamage(data[0]["damage"]);
       });
   };
 
@@ -43,7 +62,11 @@ export default function CreatePlayerRound() {
   useEffect(() => {
     fetchPlayers();
     fetchRoundTeam();
+    fetchData();
   }, [id]);
+
+  console.log(player);
+  console.log(roundTeam);
 
   let handlePlayerChange = (e: React.ChangeEvent<any>) => {
     setPlayer(e.target.value);
@@ -52,25 +75,29 @@ export default function CreatePlayerRound() {
   let handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      let res = await fetch(`${process.env.REACT_APP_API_URL}/round-player`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-        },
-        body: JSON.stringify({
-          kills: kills,
-          deaths: deaths,
-          assists: assists,
-          nonTradedKills: nonTradedKills,
-          highestStreak: highestStreak,
-          damage: damage,
-          player: player,
-          roundTeam: roundTeam["id"],
-        }),
-      });
+      let res = await fetch(
+        `${process.env.REACT_APP_API_URL}/round-player/${data[0]["id"]}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          body: JSON.stringify({
+            id: data[0]["id"],
+            kills: kills,
+            deaths: deaths,
+            assists: assists,
+            nonTradedKills: nonTradedKills,
+            highestStreak: highestStreak,
+            damage: damage,
+            player: player,
+            roundTeam: roundTeam["id"],
+          }),
+        }
+      );
       let resJson = await res.json();
       if (res.status === 200 || res.status === 201) {
-        setMessage("Round Player created successfully");
+        setMessage("Round Player updated successfully");
         navigate(`/rounds/${roundTeam["roundId"]}`);
       } else {
         setMessage("Some error occured");
@@ -85,7 +112,7 @@ export default function CreatePlayerRound() {
       <NavBar />
       <div className='form-wrapper'>
         <div className='form-body'>
-          <h1 className='form-header'>Create Player Stats</h1>
+          <h1 className='form-header'>Update Player Stats</h1>
           <h2>
             <a href={`/tournament/${roundTeam["tournamentID"]}`}>
               {roundTeam["tournamentName"]}
@@ -105,7 +132,12 @@ export default function CreatePlayerRound() {
               >
                 <option> -- Select a Player -- </option>
                 {players.map((p) => (
-                  <option value={p["playerID"]}>{p["nickName"]}</option>
+                  <option
+                    value={p["playerId"]}
+                    selected={p["playerID"] === player}
+                  >
+                    {p["nickName"]}
+                  </option>
                 ))}
               </select>
             </div>
@@ -184,7 +216,7 @@ export default function CreatePlayerRound() {
 
             <div className='button-container'>
               <button type='submit' className='form-button'>
-                Create
+                Update
               </button>
             </div>
 
