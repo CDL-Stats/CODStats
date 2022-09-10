@@ -26,25 +26,27 @@ function Tournaments() {
       <div className='form-wrapper'>
         <div className='form-body'>
           <h1 className='form-header'>All Teams</h1>
-          <table style={{ width: 500 }} className='table-striped'>
-            <thead className='table-header'>
-              <tr>
-                <th>Tournament</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tournaments.map((tournament) => (
+          {tournaments && (
+            <table style={{ width: 500 }} className='table-striped'>
+              <thead className='table-header'>
                 <tr>
-                  {" "}
-                  <td>
-                    <a href={"/tournament/" + tournament["id"]}>
-                      {tournament["name"]}
-                    </a>
-                  </td>{" "}
+                  <th>Tournament</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tournaments.map((tournament) => (
+                  <tr>
+                    {" "}
+                    <td>
+                      <a href={"/tournament/" + tournament["id"]}>
+                        {tournament["name"]}
+                      </a>
+                    </td>{" "}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
