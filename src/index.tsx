@@ -24,6 +24,8 @@ import CODMap from "./maps/map";
 import CreateRound from "./rounds/newRound";
 import Round from "./rounds/round";
 import CreatePlayerRound from "./roundPlayer/newRoundPlayer";
+import TeamHistory from "./teams/teamHistoryIndex";
+import TeamHistoryPage from "./teams/teamHistoryPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -35,6 +37,8 @@ root.render(
       <Route path='teams' element={<Teams />} />
       <Route path='teams/:slug' element={<Team />} />
       <Route path='teams/new' element={<CreateTeam />} />
+      <Route path='teams/:slug/history' element={<TeamHistory />} />
+      <Route path='teams/history/:id/:season' element={<TeamHistoryPage />} />
       <Route path='players/:slug' element={<Player />} />
       <Route path='players' element={<Players />} />
       <Route path='players/new' element={<CreatePlayer />} />
