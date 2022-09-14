@@ -29,6 +29,7 @@ export default function Match() {
     "Elimination Round 2",
     "Elimination Round 3",
     "Elimination Round 4",
+    "Elimination Finals",
     "Finals",
   ];
 

@@ -26,6 +26,7 @@ export default function CreateMatch() {
     "Elimination Round 2",
     "Elimination Round 3",
     "Elimination Round 4",
+    "Elimination Finals",
     "Finals",
   ];
 
@@ -111,7 +112,7 @@ export default function CreateMatch() {
           <h1 className='form-header'>Create Match</h1>
           <form onSubmit={handleSubmit}>
             <div className='form-group-row'>
-              <label className='form-group-label'>Team: </label>
+              <label className='form-group-label'>Tournament: </label>
               <select
                 onChange={handleTournamentChange}
                 className='form-group-input'
