@@ -272,7 +272,7 @@ function Player() {
                 type='text'
                 value={twitterURL}
                 placeholder='Twitter URL'
-                onChange={(e) => setTwitchURL(e.target.value)}
+                onChange={(e) => setTwitterURL(e.target.value)}
               />
             </div>
 
