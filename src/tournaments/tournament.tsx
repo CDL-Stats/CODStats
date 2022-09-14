@@ -233,7 +233,7 @@ function Tournament() {
           </form>
         </div>
         <div className='form-body'>
-          <h2 className='form-header'>Rounds</h2>
+          <h2 className='form-header'>Matches</h2>
           <table className='table-striped'>
             <thead>
               <tr className='table-header'>
