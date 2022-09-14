@@ -37,7 +37,7 @@ export default function Round() {
   };
 
   let handleTeamTwoWin = (e: React.ChangeEvent<any>) => {
-    setTeamOneWin(!teamTwoWin);
+    setTeamTwoWin(!teamTwoWin);
   };
 
   const fetchMaps = () => {
