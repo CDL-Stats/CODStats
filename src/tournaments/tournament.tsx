@@ -98,7 +98,7 @@ function Tournament() {
   };
 
   const fetchMatches = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/matches?tournament=${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/matches?tournamentID=${id}`)
       .then((response) => {
         return response.json();
       })
