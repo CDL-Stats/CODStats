@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import NavBar from "../navbar";
+import { useNavigate } from "react-router";
 import "../templates/form-template.scss";
 
 function Player() {
@@ -20,9 +21,10 @@ function Player() {
   const [message, setMessage] = useState<string>();
   const [id, setID] = useState<Number>();
   const [teams, setTeams] = useState([]); // TO DO: Type protect
-  const [team, setTeam] = useState<any[]>([]);
-  const [picture, setPicture] = useState<any>();
+  const [team, setTeam] = useState(Object);
+  const [picture, setPicture] = useState<any>({});
   const [pictureURL, setPictureURL] = useState();
+  const navigate = useNavigate();
 
   const fetchData = () => {
     fetch(`${process.env.REACT_APP_API_URL}/players/nickname/${slug}`)
@@ -117,7 +119,7 @@ function Player() {
           twitchURL: twitchURL,
           twitterURL: twitterURL,
           youtubeURL: youtubeURL,
-          picture: Object.keys(picture).length > 1 ? picture : undefined,
+          // picture: Object.keys(picture).length > 1 ? picture : null,
         }),
       });
       let resJson = await res.json();
@@ -125,6 +127,9 @@ function Player() {
         fetchData();
         fetchTeams();
         setMessage("Player updated successfully");
+        navigate(`/players/${nickName}`, {
+          state: { message: message, nickName: nickName },
+        });
       } else {
         setMessage("Some error occured");
       }
@@ -147,11 +152,16 @@ function Player() {
             ></div>
           )}
           <h1 className='form-header with-span'>{nickName}</h1>
-          {team && (
-            <span className='team-link'>
-              <a href={"/teams/" + team["slug"]}>{team["teamName"]}</a>
-            </span>
-          )}
+          <div className='nav-links'>
+            {team && (
+              <span className='team-link'>
+                <a href={"/teams/" + team["slug"]}>{team["teamName"]}</a>
+              </span>
+            )}
+            <a className='team-link' href='/players'>
+              All Players
+            </a>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className='form-group-row'>
               <label className='form-group-label'>First Name: </label>
@@ -197,11 +207,12 @@ function Player() {
             <div className='form-group-row'>
               <label className='form-group-label'>Team: </label>
               <select onChange={handleTeamChange} className='form-group-input'>
+                <option>-- Select a team --</option>
                 {teams &&
                   teams.map((t) => (
                     <option
                       value={t["id"]}
-                      selected={t["id"] === team["id"] ? true : false}
+                      selected={t["id"] === team?.id ? true : false}
                     >
                       {t["teamName"]}
                     </option>
@@ -274,6 +285,9 @@ function Player() {
                 <option value={country}>{country}</option>
                 <option value='USA'>USA</option>
                 <option value='Canada'>Canada</option>
+                <option value='Australia'>Australia</option>
+                <option value='Afghanistan'>Afghanistan</option>
+                <option value='France'>France</option>
               </select>
             </div>
             <button type='submit' className='form-button'>

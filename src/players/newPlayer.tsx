@@ -79,6 +79,12 @@ function CreatePlayer() {
         setLastName("");
         setNickName("");
         setTeam([]);
+        setBirthDate("");
+        setTwitchURL("");
+        setTwitchURL("");
+        setYoutubeURL("");
+        setInstagramURL("");
+        setPrimaryWeapon("");
         setMessage("Player created successfully");
       } else {
         setMessage("Some error occured");
@@ -203,7 +209,7 @@ function CreatePlayer() {
                 type='text'
                 value={twitterURL}
                 placeholder='Twitter URL'
-                onChange={(e) => setTwitchURL(e.target.value)}
+                onChange={(e) => setTwitterURL(e.target.value)}
               />
             </div>
 
@@ -215,6 +221,9 @@ function CreatePlayer() {
               >
                 <option value='USA'>USA</option>
                 <option value='Canada'>Canada</option>
+                <option value='Australia'>Australia</option>
+                <option value='Afghanistan'>Afghanistan</option>
+                <option value='France'>France</option>
               </select>
             </div>
 

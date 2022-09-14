@@ -20,7 +20,18 @@ function Players() {
     fetchData();
   }, []);
 
-  console.log(players);
+  const getPlayers = players.map((player) => {
+    const teamName = player["team"] ? player["team"]["teamName"] : "Free Agent";
+    return (
+      <tr>
+        {" "}
+        <td>
+          <a href={"/players/" + player["nickName"]}>{player["nickName"]}</a>
+        </td>{" "}
+        <td>{teamName}</td>
+      </tr>
+    );
+  });
 
   return (
     <div>
@@ -32,20 +43,10 @@ function Players() {
             <thead className='table-header'>
               <tr>
                 <th>Player Name</th>
+                <th>Team</th>
               </tr>
             </thead>
-            <tbody>
-              {players.map((player) => (
-                <tr>
-                  {" "}
-                  <td>
-                    <a href={"/players/" + player["nickName"]}>
-                      {player["nickName"]}
-                    </a>
-                  </td>{" "}
-                </tr>
-              ))}
-            </tbody>
+            <tbody>{getPlayers}</tbody>
           </table>
         </div>
       </div>

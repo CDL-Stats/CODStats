@@ -10,7 +10,7 @@ export default function TeamHistoryPage() {
   const [team, setTeam] = useState([]);
   const [player, setPlayer] = useState();
   const [players, setPlayers] = useState([]);
-  const [roster, setRoster] = useState([]);
+  const [roster, setRoster] = useState(Object);
   const { id, season } = useParams();
   const [message, setMessage] = useState<string>();
 
@@ -80,7 +80,7 @@ export default function TeamHistoryPage() {
       <NavBar />
       <body className='form-wrapper'>
         <div className='form-body'>
-          {roster["data"] && (
+          {roster?.data?.teamName && (
             <h2 className='form-header'>
               {roster["data"][0]["teamName"]} {roster["data"][0]["title"]}{" "}
               Roster History
