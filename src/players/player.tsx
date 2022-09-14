@@ -21,6 +21,8 @@ function Player() {
   const [id, setID] = useState<Number>();
   const [teams, setTeams] = useState([]); // TO DO: Type protect
   const [team, setTeam] = useState<any[]>([]);
+  const [picture, setPicture] = useState<any>();
+  const [pictureURL, setPictureURL] = useState();
 
   const fetchData = () => {
     fetch(`${process.env.REACT_APP_API_URL}/players/nickname/${slug}`)
@@ -42,9 +44,9 @@ function Player() {
         setTwitchURL(data["twitchURL"]);
         setTwitchURL(data["twitterURL"]);
         setYoutubeURL(data["youtubeURL"]);
+        setPictureURL(data["pictureURL"]);
       });
   };
-
   const fetchTeams = () => {
     fetch(`${process.env.REACT_APP_API_URL}/teams`)
       .then((response) => {
@@ -65,6 +67,27 @@ function Player() {
 
   let handleCountryChange = (e: React.ChangeEvent<any>) => {
     setCountry(e.target.value);
+  };
+
+  let handleFileRead = async (event: React.ChangeEvent<any>) => {
+    const file = event.target.files[0];
+    const fileType = file.type.split("/")[1];
+    let base64 = await convertBase64(file);
+    const fileName = `${nickName}.${fileType}`;
+    setPicture({ file: base64, fileName: fileName });
+  };
+
+  let convertBase64 = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
   useEffect(() => {
@@ -94,6 +117,7 @@ function Player() {
           twitchURL: twitchURL,
           twitterURL: twitterURL,
           youtubeURL: youtubeURL,
+          picture: Object.keys(picture).length > 1 ? picture : undefined,
         }),
       });
       let resJson = await res.json();
@@ -114,7 +138,20 @@ function Player() {
       <NavBar />
       <div className='form-wrapper'>
         <div className='form-body'>
-          <h1 className='form-header'>{nickName}</h1>
+          {pictureURL && (
+            <div
+              className='picture-container'
+              style={{
+                backgroundImage: `url("${pictureURL}")`,
+              }}
+            ></div>
+          )}
+          <h1 className='form-header with-span'>{nickName}</h1>
+          {team && (
+            <span className='team-link'>
+              <a href={"/teams/" + team["slug"]}>{team["teamName"]}</a>
+            </span>
+          )}
           <form onSubmit={handleSubmit}>
             <div className='form-group-row'>
               <label className='form-group-label'>First Name: </label>
@@ -146,6 +183,17 @@ function Player() {
                 onChange={(e) => setNickName(e.target.value)}
               />
             </div>
+
+            <div className='form-group-row'>
+              <label className='form-group-label'>Picture: </label>
+              <input
+                className='form-group-input'
+                type='file'
+                placeholder='Picture'
+                onChange={(e) => handleFileRead(e)}
+              />
+            </div>
+
             <div className='form-group-row'>
               <label className='form-group-label'>Team: </label>
               <select onChange={handleTeamChange} className='form-group-input'>
@@ -234,11 +282,6 @@ function Player() {
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
         </div>
-        {team && (
-          <span>
-            <a href={"/teams/" + team["slug"]}>Go to team</a>
-          </span>
-        )}
       </div>
     </div>
   );

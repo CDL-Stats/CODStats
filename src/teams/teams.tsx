@@ -33,14 +33,15 @@ function Teams() {
               </tr>
             </thead>
             <tbody>
-              {teams.map((team) => (
-                <tr>
-                  {" "}
-                  <td>
-                    <a href={"/teams/" + team["slug"]}>{team["teamName"]}</a>
-                  </td>{" "}
-                </tr>
-              ))}
+              {teams.length > 1 &&
+                teams.map((team) => (
+                  <tr>
+                    {" "}
+                    <td>
+                      <a href={"/teams/" + team["slug"]}>{team["teamName"]}</a>
+                    </td>{" "}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

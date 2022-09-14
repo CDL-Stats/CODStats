@@ -19,10 +19,35 @@ export default function Team() {
   const [twitterURL, setTwitterURL] = useState<string>();
   const [youtubeURL, setYoutubeURL] = useState<string>();
   const [instagramURL, setInstagramURL] = useState<string>();
+  const [picture, setPicture] = useState({});
+  const [pictureURL, setPictureURL] = useState();
 
   const handleDelete = () => {
     fetch(`${process.env.REACT_APP_API_URL}/teams/${slug}`, {
       method: "DELETE",
+    });
+  };
+
+  let handleFileRead = async (event: React.ChangeEvent<any>) => {
+    const file = event.target.files[0];
+    const fileType = file.type.split("/")[1];
+    let base64 = await convertBase64(file);
+    const fileName = `${teamName}.${fileType}`;
+    // console.log(base64);
+    // base64 = `data:${file.type};base64,${btoa(event.target.result)}`;
+    setPicture({ file: base64, fileName: fileName });
+  };
+
+  let convertBase64 = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
     });
   };
 
@@ -46,6 +71,7 @@ export default function Team() {
           twitterURL: twitterURL,
           youtubeURL: youtubeURL,
           instagramURL: instagramURL,
+          picture: Object.keys(picture).length > 1 ? picture : undefined,
         }),
       });
       let resJson = await res.json();
@@ -77,6 +103,7 @@ export default function Team() {
         setTwitterURL(data["twitterURL"]);
         setInstagramURL(data["instagramURL"]);
         setYoutubeURL(data["youtubeURL"]);
+        setPictureURL(data["pictureURL"]);
       });
   };
 
@@ -104,6 +131,14 @@ export default function Team() {
       <NavBar />
       <body className='form-wrapper'>
         <div className='form-body'>
+          {pictureURL && (
+            <div
+              className='picture-container'
+              style={{
+                backgroundImage: `url("${pictureURL}")`,
+              }}
+            ></div>
+          )}
           <h1 className='form-header'>
             {team["teamLocation"]} {team["teamName"]}
           </h1>
@@ -197,6 +232,16 @@ export default function Team() {
                 value={abbreviation}
                 placeholder='ex: LAT'
                 onChange={(e) => setAbbreviation(e.target.value)}
+              />
+            </div>
+
+            <div className='form-group-row'>
+              <label className='form-group-label'>Picture: </label>
+              <input
+                className='form-group-input'
+                type='file'
+                placeholder='Picture'
+                onChange={(e) => handleFileRead(e)}
               />
             </div>
 
