@@ -284,10 +284,13 @@ function Player() {
               >
                 <option value={country}>{country}</option>
                 <option value='USA'>USA</option>
-                <option value='Canada'>Canada</option>
                 <option value='Australia'>Australia</option>
                 <option value='Afghanistan'>Afghanistan</option>
+                <option value='Canada'>Canada</option>
+                <option value='Denmark'>Denmark</option>
+                <option value='England'>England</option>
                 <option value='France'>France</option>
+                <option value='Scotland'>Scotland</option>
               </select>
             </div>
             <button type='submit' className='form-button'>
