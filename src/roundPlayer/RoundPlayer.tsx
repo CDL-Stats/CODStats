@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import NavBar from "../navbar";
+import RoundSpecificData from "./roundSpecificData";
 
 export default function UpdatePlayerRound() {
   const { id, playerstat } = useParams();
@@ -17,6 +18,19 @@ export default function UpdatePlayerRound() {
   const [roundTeam, setRoundTeam] = useState({});
   const [message, setMessage] = useState<string>();
   const numberID = id ? parseInt(id) : 1;
+  const [roundSpecific, setRoundSpecific] = useState({
+    firstBloods: null,
+    plants: null,
+    defuses: null,
+    hillTime: null,
+    p1Time: null,
+    p2Time: null,
+    p3Time: null,
+    p4Time: null,
+    p5Time: null,
+    zoneCapture: null,
+    zoneTiers: null,
+  });
 
   const navigate = useNavigate();
 
@@ -39,6 +53,7 @@ export default function UpdatePlayerRound() {
       })
       .then((data) => {
         setData(data);
+        const pd = data[0];
         setPlayer(data[0]["playerId"]);
         setKills(data[0]["kills"]);
         setDeaths(data[0]["deaths"]);
@@ -46,6 +61,20 @@ export default function UpdatePlayerRound() {
         setNTK(data[0]["nonTradedKills"]);
         setStreak(data[0]["highestStreak"]);
         setDamage(data[0]["damage"]);
+        setRoundSpecific({
+          ...roundSpecific,
+          firstBloods: pd.firstBloods,
+          plants: pd.plants,
+          defuses: pd.defuses,
+          hillTime: pd.hillTime,
+          p1Time: pd.p1Time,
+          p2Time: pd.p2Time,
+          p3Time: pd.p3Time,
+          p4Time: pd.p4Time,
+          p5Time: pd.p5Time,
+          zoneCapture: pd.zoneCaptures,
+          zoneTiers: pd.zoneTiersCaptured,
+        });
       });
   };
 
@@ -92,6 +121,7 @@ export default function UpdatePlayerRound() {
             damage: damage,
             player: player,
             roundTeam: roundTeam["id"],
+            roundSpecific: roundSpecific,
           }),
         }
       );
@@ -213,6 +243,14 @@ export default function UpdatePlayerRound() {
                 onChange={(e) => setDamage(e.target.valueAsNumber)}
               />
             </div>
+
+            {roundTeam["gameMode"] && (
+              <RoundSpecificData
+                mode={roundTeam["gameMode"]}
+                setRoundSpecific={setRoundSpecific}
+                roundSpecific={roundSpecific}
+              />
+            )}
 
             <div className='button-container'>
               <button type='submit' className='form-button'>

@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import NavBar from "../navbar";
 import Tournament from "../tournaments/tournament";
+import RoundSpecificData from "./roundSpecificData";
 
 export default function CreatePlayerRound() {
   const { id } = useParams<string>();
@@ -16,6 +17,19 @@ export default function CreatePlayerRound() {
   const [players, setPlayers] = useState([]);
   const [roundTeam, setRoundTeam] = useState({});
   const [message, setMessage] = useState<string>();
+  const [roundSpecific, setRoundSpecific] = useState({
+    firstBloods: null,
+    plants: null,
+    defuses: null,
+    hillTime: null,
+    p1Time: null,
+    p2Time: null,
+    p3Time: null,
+    p4Time: null,
+    p5Time: null,
+    zoneCapture: null,
+    zoneTiers: null,
+  });
   const numberID = id ? parseInt(id) : 1;
 
   const navigate = useNavigate();
@@ -66,6 +80,7 @@ export default function CreatePlayerRound() {
           damage: damage,
           player: player,
           roundTeam: roundTeam["id"],
+          roundSpecific: roundSpecific,
         }),
       });
       let resJson = await res.json();
@@ -182,12 +197,19 @@ export default function CreatePlayerRound() {
               />
             </div>
 
+            {roundTeam["gameMode"] && (
+              <RoundSpecificData
+                mode={roundTeam["gameMode"]}
+                setRoundSpecific={setRoundSpecific}
+                roundSpecific={roundSpecific}
+              />
+            )}
+
             <div className='button-container'>
               <button type='submit' className='form-button'>
                 Create
               </button>
             </div>
-
             <div className='message'>{message ? <p>{message}</p> : null}</div>
           </form>
         </div>
