@@ -14,6 +14,7 @@ export default function CreateMatch() {
   const [teamTwo, setTeamTwo] = useState("");
   const [message, setMessage] = useState("");
   const [searchParams] = useSearchParams();
+  const [replayLink, setReplayLink] = useState<string>();
 
   const navigate = useNavigate();
   const preSetTournament = searchParams.get("tournament");
@@ -88,6 +89,7 @@ export default function CreateMatch() {
           tournamentRound: round,
           roundID: roundID,
           bestOf: bestOf,
+          replayLink: replayLink,
           teams: [parseInt(teamOne), parseInt(teamTwo)],
         }),
       });
@@ -190,6 +192,18 @@ export default function CreateMatch() {
                 ))}
               </select>
             </div>
+
+            <div className='form-group-row'>
+              <label className='form-group-label'>Replay Link: </label>
+              <input
+                className='form-group-input'
+                type='text'
+                value={replayLink}
+                placeholder='Replay Link'
+                onChange={(e) => setReplayLink(e.target.value)}
+              />
+            </div>
+
             <div className='button-container'>
               <button type='submit' className='form-button'>
                 Create

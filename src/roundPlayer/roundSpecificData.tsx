@@ -12,7 +12,7 @@ export default function RoundSpecificData(props: any) {
           type='number'
           value={props.roundSpecific["firstBloods"]}
           required
-          placeholder='Defuses'
+          placeholder='First Bloods'
           onChange={(e) =>
             props.setRoundSpecific({
               ...props.roundSpecific,

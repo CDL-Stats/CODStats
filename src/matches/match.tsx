@@ -16,6 +16,8 @@ export default function Match() {
   const [teamOne, setTeamOne] = useState({});
   const [teamTwo, setTeamTwo] = useState({});
   const [message, setMessage] = useState("");
+  const [replayLink, setReplayLink] = useState<string>();
+
   let teamOneID: any, teamTwoID;
 
   const navigate = useNavigate();
@@ -81,6 +83,7 @@ export default function Match() {
         setTournament(firstRow["tournament"]);
         setTeamOne(firstRow["teams"][0]);
         setTeamTwo(firstRow["teams"][1]);
+        setReplayLink(firstRow["replayLink"]);
       });
   };
 
@@ -101,7 +104,6 @@ export default function Match() {
   };
 
   let handleSubmit = async (e: { preventDefault: () => void }) => {
-    console.log(teamTwo);
     const teamOneSmall = {
       id: teamOne["id"],
       teamId: teamOne["team_id"],
@@ -127,6 +129,7 @@ export default function Match() {
           tournamentRound: round,
           roundID: roundID,
           bestOf: bestOf,
+          replayLink: replayLink,
           teams: [teamOneSmall, teamTwoSmall],
         }),
       });
@@ -285,6 +288,17 @@ export default function Match() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className='form-group-row'>
+              <label className='form-group-label'>Replay Link: </label>
+              <input
+                className='form-group-input'
+                type='text'
+                value={replayLink}
+                placeholder='Replay Link'
+                onChange={(e) => setReplayLink(e.target.value)}
+              />
             </div>
 
             <div className='button-container'>
