@@ -101,6 +101,13 @@ export default function UpdatePlayerRound() {
     setPlayer(e.target.value);
   };
 
+  const handleDelete = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/round-player/${data[0]["id"]}`, {
+      method: "DELETE",
+    });
+    navigate(`/rounds/${roundTeam["roundId"]}`);
+  };
+
   let handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
@@ -255,6 +262,10 @@ export default function UpdatePlayerRound() {
             <div className='button-container'>
               <button type='submit' className='form-button'>
                 Update
+              </button>
+
+              <button className='form-button delete' onClick={handleDelete}>
+                Delete
               </button>
             </div>
 

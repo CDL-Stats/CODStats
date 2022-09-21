@@ -25,7 +25,7 @@ function Tournaments() {
       <NavBar />
       <div className='form-wrapper'>
         <div className='form-body'>
-          <h1 className='form-header'>All Teams</h1>
+          <h1 className='form-header'>All Tournaments</h1>
           {tournaments && (
             <table style={{ width: 500 }} className='table-striped'>
               <thead className='table-header'>
