@@ -9,11 +9,11 @@ export default function UpdatePlayerRound() {
   const [data, setData] = useState([]);
   const [kills, setKills] = useState<number>();
   const [deaths, setDeaths] = useState<number>();
-  const [assists, setAssists] = useState<number>();
-  const [nonTradedKills, setNTK] = useState<number>();
-  const [highestStreak, setStreak] = useState<number>();
-  const [damage, setDamage] = useState<number>();
-  const [player, setPlayer] = useState<number>();
+  const [assists, setAssists] = useState<number | null>(null);
+  const [nonTradedKills, setNTK] = useState<number | null>(null);
+  const [highestStreak, setStreak] = useState<number | null>(null);
+  const [damage, setDamage] = useState<number | null>(null);
+  const [player, setPlayer] = useState<number | null>(null);
   const [players, setPlayers] = useState([]);
   const [roundTeam, setRoundTeam] = useState({});
   const [message, setMessage] = useState<string>();
@@ -209,7 +209,6 @@ export default function UpdatePlayerRound() {
                 className='form-group-input'
                 type='number'
                 value={assists}
-                required
                 placeholder='Assists'
                 onChange={(e) => setAssists(e.target.valueAsNumber)}
               />
@@ -221,7 +220,6 @@ export default function UpdatePlayerRound() {
                 className='form-group-input'
                 type='number'
                 value={nonTradedKills}
-                required
                 placeholder='Non-Traded Kills'
                 onChange={(e) => setNTK(e.target.valueAsNumber)}
               />
@@ -233,7 +231,6 @@ export default function UpdatePlayerRound() {
                 className='form-group-input'
                 type='number'
                 value={highestStreak}
-                required
                 placeholder='Highest Streak'
                 onChange={(e) => setStreak(e.target.valueAsNumber)}
               />
@@ -245,7 +242,6 @@ export default function UpdatePlayerRound() {
                 className='form-group-input'
                 type='number'
                 value={damage}
-                required
                 placeholder='Damage'
                 onChange={(e) => setDamage(e.target.valueAsNumber)}
               />

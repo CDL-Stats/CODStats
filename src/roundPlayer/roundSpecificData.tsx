@@ -11,7 +11,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["firstBloods"]}
-          required
           placeholder='First Bloods'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -28,7 +27,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["plants"]}
-          required
           placeholder='Plants'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -45,7 +43,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["defuses"]}
-          required
           placeholder='Defuses'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -66,7 +63,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["hillTime"]}
-          required
           placeholder='Hill Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -83,7 +79,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["p1Time"]}
-          required
           placeholder='P1 Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -100,7 +95,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["p2Time"]}
-          required
           placeholder='P2 Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -117,7 +111,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["p3Time"]}
-          required
           placeholder='P3 Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -134,7 +127,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["p4Time"]}
-          required
           placeholder='P4 Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -151,7 +143,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["p5Time"]}
-          required
           placeholder='P5 Time'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -172,7 +163,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["zoneCapture"]}
-          required
           placeholder='Zone Capture'
           onChange={(e) =>
             props.setRoundSpecific({
@@ -189,7 +179,6 @@ export default function RoundSpecificData(props: any) {
           className='form-group-input'
           type='number'
           value={props.roundSpecific["zoneTiers"]}
-          required
           placeholder='Zone Tiers Captured'
           onChange={(e) =>
             props.setRoundSpecific({
