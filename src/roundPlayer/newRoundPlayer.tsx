@@ -154,7 +154,7 @@ export default function CreatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={assists}
+                value={assists || null}
                 placeholder='Assists'
                 onChange={(e) => setAssists(e.target.valueAsNumber)}
               />
