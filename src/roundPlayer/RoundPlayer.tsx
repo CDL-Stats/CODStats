@@ -208,7 +208,7 @@ export default function UpdatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={assists || undefined}
+                value={assists ? assists : undefined}
                 placeholder='Assists'
                 onChange={(e) => setAssists(e.target.valueAsNumber)}
               />
