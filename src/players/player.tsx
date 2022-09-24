@@ -119,7 +119,7 @@ function Player() {
           twitchURL: twitchURL,
           twitterURL: twitterURL,
           youtubeURL: youtubeURL,
-          // picture: Object.keys(picture).length > 1 ? picture : null,
+          picture: Object.keys(picture).length > 1 ? picture : null,
         }),
       });
       let resJson = await res.json();
