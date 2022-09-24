@@ -230,7 +230,7 @@ export default function UpdatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={highestStreak}
+                value={highestStreak ? highestStreak : undefined}
                 placeholder='Highest Streak'
                 onChange={(e) => setStreak(e.target.valueAsNumber)}
               />
@@ -241,7 +241,7 @@ export default function UpdatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={damage}
+                value={damage ? damage : undefined}
                 placeholder='Damage'
                 onChange={(e) => setDamage(e.target.valueAsNumber)}
               />
