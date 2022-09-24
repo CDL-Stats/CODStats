@@ -154,7 +154,7 @@ export default function CreatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={assists || assists ? assists : undefined}
+                value={assists ? assists : undefined}
                 placeholder='Assists'
                 onChange={(e) => setAssists(e.target.valueAsNumber)}
               />
@@ -165,7 +165,7 @@ export default function CreatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={nonTradedKills}
+                value={nonTradedKills ? nonTradedKills : undefined}
                 placeholder='Non-Traded Kills'
                 onChange={(e) => setNTK(e.target.valueAsNumber)}
               />
@@ -176,7 +176,7 @@ export default function CreatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={highestStreak}
+                value={highestStreak ? highestStreak : undefined}
                 placeholder='Highest Streak'
                 onChange={(e) => setStreak(e.target.valueAsNumber)}
               />
@@ -187,7 +187,7 @@ export default function CreatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={damage}
+                value={damage ? damage : undefined}
                 placeholder='Damage'
                 onChange={(e) => setDamage(e.target.valueAsNumber)}
               />

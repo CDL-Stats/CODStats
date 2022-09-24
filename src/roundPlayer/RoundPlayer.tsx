@@ -219,7 +219,7 @@ export default function UpdatePlayerRound() {
               <input
                 className='form-group-input'
                 type='number'
-                value={nonTradedKills}
+                value={nonTradedKills ? nonTradedKills : undefined}
                 placeholder='Non-Traded Kills'
                 onChange={(e) => setNTK(e.target.valueAsNumber)}
               />
